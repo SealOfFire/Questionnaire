@@ -9,13 +9,6 @@ import org.junit.Test;
 
 /** 测试数据库连接 */
 public class TestMySqlConnect {
-	@Test
-	public void testPlus() {
-		// puls.plus(1, 1);
-		// assertEquals(2, puls.getresult());
-		int debug = 0;
-		debug++;
-	}
 
 	/** 连接数据库测试 */
 	@Test
