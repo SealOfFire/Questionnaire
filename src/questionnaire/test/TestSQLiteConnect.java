@@ -4,13 +4,13 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-import questionnaire.dal.SQLServerManager;
+import questionnaire.dal.SQLiteManager;
 
-public class TestSQLServer {
+public class TestSQLiteConnect {
 	@Test
 	public void asdf() {
 		try {
-			SQLServerManager manager = new SQLServerManager();
+			SQLiteManager manager = new SQLiteManager();
 			manager.getConnect();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
