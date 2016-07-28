@@ -16,5 +16,35 @@
 			method="execute">
 			<result name="success">/HelloWorld.jsp</result>
 		</action>
+		
+		<!-- ############################ 问卷处理 start ############################ -->
+		<!-- 问卷一览 -->
+		<action name="QuestionnaireList" class="questionnaire.web.action.QuestionnaireAction" method="getList">
+			<result name="success">/pages/questionnaire/list.jsp</result>
+		</action>
+		
+		<!-- 创建问卷 -->
+		<action name="QuestionnaireCreate" class="questionnaire.web.action.QuestionnaireAction" method="create">
+			<result name="success">/pages/questionnaire/edit.jsp</result>
+		</action>
+		
+		<!-- 编辑问卷 -->
+		<action name="QuestionnaireEdit" class="questionnaire.web.action.QuestionnaireAction" method="edit">
+			<result name="success">/pages/questionnaire/edit.jsp</result>
+		</action>
+		
+		<!-- 删除问卷 -->
+		<action name="QuestionnaireDelete" class="questionnaire.web.action.QuestionnaireAction" method="delete">
+			<result name="success">/pages/questionnaire/list.jsp</result>
+		</action>
+		<!-- ############################ 问卷处理 end ############################ -->
+		
+		<!-- ############################ 问题处理 start ############################ -->
+		<!-- 问题一览 -->
+		<action name="QuestionList" class="questionnaire.web.action.QuestionAction"
+			method="getList">
+			<result name="success">/pages/question/list.jsp</result>
+		</action>
+		<!-- ############################ 问题处理 end ############################ -->
 	</package>
 </struts>
