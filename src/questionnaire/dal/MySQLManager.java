@@ -12,6 +12,8 @@ import java.util.ArrayList;
 /** 数据库操作管理 */
 public class MySQLManager {
 
+	private static String connectionString = "jdbc:mysql://localhost/questionnairedb?user=root&password=root&characterEncoding=utf8&useSSL=false";
+
 	/** 构造函数 */
 	public MySQLManager() {
 		try {
@@ -28,8 +30,7 @@ public class MySQLManager {
 	 * @throws SQLException
 	 */
 	public Connection getConnect() throws SQLException {
-		Connection connection = DriverManager.getConnection(
-				"jdbc:mysql://localhost/questionnairedb?user=root&password=root&characterEncoding=utf8&useSSL=false");
+		Connection connection = DriverManager.getConnection(connectionString);
 		return connection;
 	}
 
