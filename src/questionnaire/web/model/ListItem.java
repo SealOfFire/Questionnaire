@@ -1,5 +1,7 @@
 package questionnaire.web.model;
 
+import questionnaire.web.enumeration.QuestionnaireType;
+
 public class ListItem {
 	private Object key;
 	private String value;

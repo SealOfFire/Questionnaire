@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SQLiteManager {
-	private static String connectionString = "jdbc:sqlite:test.db";
+	private static String connectionString = "jdbc:sqlite:QuestionnaireDB.db";
 
 	/** 构造函数 */
 	public SQLiteManager() {

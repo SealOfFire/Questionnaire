@@ -7,6 +7,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>问题列表</title>
 </head>
-<body>问题列表
+<body>
+	<p>问题列表</p>
+	<a href="<s:url action='QuestionCreate'/>">创建问题</a>
+	<table>
+		<tr>
+			<th>编号</th>
+			<th>问题名称</th>
+			<th>类型</th>
+			<th>操作</th>
+		</tr>
+		<s:iterator value="questions" status="status">
+			<tr>
+				<td><s:property value="#status.index+1" /></td>
+				<td><s:property value="caption" /></td>
+				<td><s:property value="QuestionType" /></td>
+				<td><a
+					href="<s:url action="QuestionEdit"><s:param name="questionID" value="questionID"></s:param></s:url>">编辑</a>
+					<a
+					href="<s:url action="QuestionDelete"><s:param name="questionID" value="questionID"></s:param></s:url>">删除</a>
+				</td>
+			</tr>
+		</s:iterator>
+	</table>
 </body>
 </html>

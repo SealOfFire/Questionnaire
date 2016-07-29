@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import questionnaire.web.enumeration.QuestionnaireType;
 import questionnaire.web.model.ListItem;
 import questionnaire.web.model.Questionnaire;
-import questionnaire.web.model.QuestionnaireType;
 
 public class QuestionnaireAction extends ActionSupport {
 

@@ -2,11 +2,13 @@ package questionnaire.web.model;
 
 import java.util.UUID;
 
+import questionnaire.web.enumeration.QuestionnaireType;
+
 /** 问卷 */
 public class Questionnaire {
 
 	/** 问卷ID */
-	private UUID questionnaireID;
+	private String questionnaireID;
 
 	/** 问卷标题 */
 	private String title;
@@ -21,17 +23,17 @@ public class Questionnaire {
 	}
 
 	public Questionnaire(String title, int timeLimit, QuestionnaireType questionnaireType) {
-		this.questionnaireID = UUID.randomUUID();
+		this.questionnaireID = UUID.randomUUID().toString();
 		this.title = title;
 		this.timeLimit = timeLimit;
 		this.questionnaireType = questionnaireType;
 	}
 
-	public UUID getQuestionnaireID() {
+	public String getQuestionnaireID() {
 		return questionnaireID;
 	}
 
-	public void setQuestionnaireID(UUID questionnaireID) {
+	public void setQuestionnaireID(String questionnaireID) {
 		this.questionnaireID = questionnaireID;
 	}
 
