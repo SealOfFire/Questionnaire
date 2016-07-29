@@ -17,10 +17,11 @@ public class Question {
 	private QuestionType questionType;
 
 	public Question() {
+		this.caption = "";
+		this.questionType = QuestionType.TemperamentTest;
 	}
 
 	public Question(String caption, QuestionType questionType) {
-		this.questionID = UUID.randomUUID().toString();
 		this.caption = caption;
 		this.questionType = questionType;
 	}
