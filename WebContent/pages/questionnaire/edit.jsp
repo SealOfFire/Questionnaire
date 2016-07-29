@@ -10,12 +10,14 @@
 <body>
 	<p>问卷编辑</p>
 	<s:form action="QuestionnaireEdit">
+		<!-- 问卷部分 -->
 		<s:hidden name="questionnaireID" />
 		<s:textfield name="questionnaire.title" label="名称" />
 		<s:select label="类型" name="questionnaire.questionnaireType"
 			list="ddlQuestionnaireType" listKey="key" listValue="value"
 			value="TemperamentTest" />
 		<s:textfield name="questionnaire.timeLimit" label="限时" />
+		<!-- 问题部分 -->
 		<s:submit value="Submit" />
 	</s:form>
 </body>

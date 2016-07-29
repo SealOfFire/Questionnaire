@@ -1,8 +1,6 @@
 package questionnaire.web.action;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -45,6 +43,7 @@ public class QuestionnaireAction extends ActionSupport {
 			// 创建问卷
 
 			// 问卷信息保存到数据库
+			
 		} else {
 			// 编辑问卷
 
