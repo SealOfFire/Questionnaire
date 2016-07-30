@@ -9,6 +9,7 @@
 <title>问题列表</title>
 </head>
 <body>
+	<a href="<s:url action='index'/>">返回首页</a>
 	<p>问题列表</p>
 	<a href="<s:url action='QuestionCreate'/>">创建问题</a>
 	<table>

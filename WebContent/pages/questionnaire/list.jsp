@@ -9,6 +9,7 @@
 <title>问卷列表</title>
 </head>
 <body>
+	<a href="<s:url action='index'/>">返回首页</a>
 	<p>问卷列表</p>
 	<p>
 		<a href="<s:url action='QuestionnaireCreate'/>">创建问卷</a>
