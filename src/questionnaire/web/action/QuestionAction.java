@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import questionnaire.bll.OptionBLL;
 import questionnaire.bll.QuestionBLL;
 import questionnaire.web.enumeration.QuestionnaireType;
 import questionnaire.web.model.ListItem;
+import questionnaire.web.model.Option;
 import questionnaire.web.model.Question;
 
 /** 问题 */
@@ -18,6 +20,8 @@ public class QuestionAction extends ActionSupport {
 	private Question question = null;
 	private ArrayList<Question> questions = null;
 	private ArrayList<ListItem> ddlQuestionType = null;
+	private Option option = null;
+	private ArrayList<Option> options = null;
 
 	/** 获取所有问题 */
 	public String getList() throws Exception {
@@ -50,6 +54,8 @@ public class QuestionAction extends ActionSupport {
 		// 获取问题数据
 		this.question = new QuestionBLL().select(this.questionID);
 
+		//
+		this.options = new OptionBLL().selectList(this.questionID);
 		return SUCCESS;
 	}
 
@@ -57,6 +63,12 @@ public class QuestionAction extends ActionSupport {
 	public String create() throws Exception {
 		this.initDropDownList();
 		this.questionID = null;
+		return SUCCESS;
+	}
+
+	/** 删除问题 */
+	public String delete() {
+		new QuestionBLL().delete(this.questionID);
 		return SUCCESS;
 	}
 
@@ -98,4 +110,21 @@ public class QuestionAction extends ActionSupport {
 	public void setQuestions(ArrayList<Question> questions) {
 		this.questions = questions;
 	}
+
+	public Option getOption() {
+		return option;
+	}
+
+	public void setOption(Option option) {
+		this.option = option;
+	}
+
+	public ArrayList<Option> getOptions() {
+		return options;
+	}
+
+	public void setOptions(ArrayList<Option> options) {
+		this.options = options;
+	}
+
 }

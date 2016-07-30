@@ -1,7 +1,5 @@
 package questionnaire.web.model;
 
-import java.util.UUID;
-
 import questionnaire.web.enumeration.QuestionType;
 
 /** 问题 */
@@ -14,16 +12,18 @@ public class Question {
 	private String caption;
 
 	/** 类型(性格测试/坐席素质) */
-	private QuestionType questionType;
+	private String questionType;
+
+	private String questionTypeString;
 
 	public Question() {
 		this.caption = "";
-		this.questionType = QuestionType.TemperamentTest;
+		this.questionType = QuestionType.TemperamentTest.toString();
 	}
 
 	public Question(String caption, QuestionType questionType) {
 		this.caption = caption;
-		this.questionType = questionType;
+		this.questionType = questionType.toString();
 	}
 
 	public String getQuestionID() {
@@ -50,11 +50,30 @@ public class Question {
 		this.caption = caption;
 	}
 
-	public QuestionType getQuestionType() {
+	public String getQuestionType() {
 		return questionType;
 	}
 
-	public void setQuestionType(QuestionType questionType) {
+	public void setQuestionType(String questionType) {
 		this.questionType = questionType;
+	}
+
+	public String getQuestionTypeString() {
+		switch (this.questionType) {
+		case "TemperamentTest":
+			this.questionTypeString = "性格测试";
+			break;
+		case "SeatQuality":
+			this.questionTypeString = "坐席素质";
+			break;
+		default:
+			this.questionTypeString = "";
+			break;
+		}
+		return this.questionTypeString;
+	}
+
+	public void setQuestionTypeString(String questionTypeString) {
+		this.questionTypeString = questionTypeString;
 	}
 }

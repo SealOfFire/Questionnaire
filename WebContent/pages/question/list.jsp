@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="scripts/common.js"></script>
 <title>问题列表</title>
 </head>
 <body>
@@ -21,10 +22,10 @@
 			<tr>
 				<td><s:property value="#status.index+1" /></td>
 				<td><s:property value="caption" /></td>
-				<td><s:property value="QuestionType" /></td>
+				<td><s:property value="questionTypeString" /></td>
 				<td><a
 					href="<s:url action="QuestionEdit"><s:param name="questionID" value="questionID"></s:param></s:url>">编辑</a>
-					<a
+					<a onclick="javascript:return p_del();"
 					href="<s:url action="QuestionDelete"><s:param name="questionID" value="questionID"></s:param></s:url>">删除</a>
 				</td>
 			</tr>

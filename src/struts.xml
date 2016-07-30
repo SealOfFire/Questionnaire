@@ -70,8 +70,20 @@
 
 		<action name="QuestionDelete" class="questionnaire.web.action.QuestionAction"
 			method="delete">
-			<result name="success" type="chain">QuestionEdit</result>
+			<result name="success" type="chain">QuestionList</result>
 		</action>
 		<!-- ############################ 问题处理 end ############################ -->
+
+		<!-- ############################ 选项处理 start ############################ -->
+		<action name="OptionCreate" class="questionnaire.web.action.OptionAction"
+			method="create">
+			<result name="success" type="chain">QuestionEdit</result>
+		</action>
+
+		<action name="OptionDelete" class="questionnaire.web.action.OptionAction"
+			method="delete">
+			<result name="success" type="chain">QuestionEdit</result>
+		</action>
+		<!-- ############################ 选项处理 end ############################ -->
 	</package>
 </struts>

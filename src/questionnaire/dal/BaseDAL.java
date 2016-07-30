@@ -7,9 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 
 public class BaseDAL {
-	private final static String connectionString = "jdbc:mysql://localhost/questionnairedb?user=root&password=root&characterEncoding=utf8&useSSL=false";
+	private final static String connectionString = "jdbc:mysql://localhost/questionnairedb?user=root&password=root&characterEncoding=utf8&useSSL=false&serverTimezone=GMT";
 	private final static String className = "com.mysql.cj.jdbc.Driver";
 
 	/**  */
@@ -32,11 +33,11 @@ public class BaseDAL {
 	}
 
 	/** 修改数据库 */
-	public String modify(String query, Object[] parameters) {
+	public int modify(String query, Object[] parameters) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String id = null;
+		ResultSet resultSet = null;
+		int value = -1;
 		try {
 
 			conn = this.getConnect();
@@ -46,11 +47,70 @@ public class BaseDAL {
 			}
 
 			// 执行查询
-			int value = pstmt.executeUpdate();
-			rs = pstmt.getGeneratedKeys();
+			value = pstmt.executeUpdate();
+
+			// 关闭连接
+			pstmt.close();
+			pstmt = null;
+			conn.close();
+			conn = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 出错时关闭连接
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				resultSet = null;
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				pstmt = null;
+			}
+
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				conn = null;
+			}
+		}
+		return value;
+	}
+
+	/** 检索数据 */
+	public void select(String query, Object[] parameters) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+
+			conn = this.getConnect();
+			pstmt = conn.prepareStatement(query);
+			for (int i = 0; i < parameters.length; i++) {
+				pstmt.setObject(i + 1, parameters[i]);
+			}
+
+			// 执行查询
+			rs = pstmt.executeQuery();
+
+			// TODO 测试代码
+			while (rs.next()) {
+				System.out.println(rs.getString("QuestionnaireID"));
+			}
 
 			rs.close();
-			// 关闭连接
+			rs = null;
 			pstmt.close();
 			pstmt = null;
 			conn.close();
@@ -86,7 +146,5 @@ public class BaseDAL {
 				conn = null;
 			}
 		}
-
-		return id;
 	}
 }
