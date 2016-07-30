@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import questionnaire.bll.OptionBLL;
+import questionnaire.bll.QuestionBLL;
+import questionnaire.bll.QuestionnaireBLL;
 import questionnaire.web.enumeration.QuestionnaireType;
 import questionnaire.web.model.ListItem;
 import questionnaire.web.model.Questionnaire;
@@ -20,49 +23,53 @@ public class QuestionnaireAction extends ActionSupport {
 
 	/** 获取所有问卷 */
 	public String getList() throws Exception {
-
-		this.questionnaires = new ArrayList<Questionnaire>();
-		this.questionnaires.add(new Questionnaire("title1", 1, QuestionnaireType.TemperamentTest));
-		this.questionnaires.add(new Questionnaire("title2", 2, QuestionnaireType.SeatQuality));
-		this.questionnaires.add(new Questionnaire("title3", 3, QuestionnaireType.TemperamentTest));
-
+		this.questionnaires = new QuestionnaireBLL().selectList();
 		return SUCCESS;
 	}
 
 	/** 创建问卷 */
 	public String create() throws Exception {
 		this.questionnaireID = null;
-		this.initDDLQuestionnaireType();
+		this.initDropDownList();
 		return SUCCESS;
 	}
 
 	/** 编辑问卷 */
-	public String edit() throws Exception {
-		this.initDDLQuestionnaireType();
-		if (this.questionnaireID == null) {
-			// 创建问卷
-
-			// 问卷信息保存到数据库
-			
+	public String save() throws Exception {
+		this.initDropDownList();
+		if (this.questionnaire.notSaved()) {
+			// 保存到数据库
+			this.questionnaire = new QuestionnaireBLL().insert(this.questionnaire);
+			this.questionnaireID = this.questionnaire.getQuestionnaireID();
 		} else {
-			// 编辑问卷
-
+			// 编辑
+			this.questionnaire = new QuestionnaireBLL().update(this.questionnaire);
+			this.questionnaireID = this.questionnaire.getQuestionnaireID();
 		}
 
 		return SUCCESS;
 	}
 
+	/** 编辑问题 */
+	public String edit() throws Exception {
+		// 初始化下拉框数据
+		this.initDropDownList();
+		// 获取问题数据
+		this.questionnaire = new QuestionnaireBLL().select(this.questionnaireID);
+		return SUCCESS;
+	}
+
 	/** 删除问卷 */
 	public String delete() throws Exception {
-
+		new QuestionnaireBLL().delete(this.questionnaireID);
 		return SUCCESS;
 	}
 
 	/** 初始化下拉框的值 */
-	private void initDDLQuestionnaireType() {
+	private void initDropDownList() {
 		this.ddlQuestionnaireType = new ArrayList<ListItem>();
-		this.ddlQuestionnaireType.add(new ListItem(QuestionnaireType.TemperamentTest));
-		this.ddlQuestionnaireType.add(new ListItem(QuestionnaireType.SeatQuality));
+		this.ddlQuestionnaireType.add(new ListItem(QuestionnaireType.TemperamentTest, "性格测试"));
+		this.ddlQuestionnaireType.add(new ListItem(QuestionnaireType.SeatQuality, "坐席素质"));
 
 		// this.ddlQuestionnaireType = new HashMap<String, String>();
 		// this.ddlQuestionnaireType.put("TemperamentTest", "性格测试");

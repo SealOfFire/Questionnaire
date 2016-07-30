@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.opensymphony.xwork2.ActionSupport;
 
 import questionnaire.bll.OptionBLL;
-import questionnaire.bll.QuestionBLL;
 import questionnaire.web.model.Option;
 
 /** 选项 */

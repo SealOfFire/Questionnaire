@@ -36,10 +36,15 @@
 			<result name="success">/pages/questionnaire/edit.jsp</result>
 		</action>
 
+		<action name="QuestionnaireSave" class="questionnaire.web.action.QuestionnaireAction"
+			method="save">
+			<result name="success" type="chain">QuestionnaireEdit</result>
+		</action>
+
 		<!-- 删除问卷 -->
 		<action name="QuestionnaireDelete" class="questionnaire.web.action.QuestionnaireAction"
 			method="delete">
-			<result name="success">/pages/questionnaire/list.jsp</result>
+			<result name="success" type="chain">QuestionnaireList</result>
 		</action>
 		<!-- ############################ 问卷处理 end ############################ -->
 

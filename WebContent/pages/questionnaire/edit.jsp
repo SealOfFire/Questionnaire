@@ -8,14 +8,14 @@
 <title>问卷编辑</title>
 </head>
 <body>
-	<p>问卷编辑</p>
-	<s:form action="QuestionnaireEdit">
+	<a href="<s:url action='QuestionnaireList'/>">返回</a>
+	<s:form action="QuestionnaireSave">
 		<!-- 问卷部分 -->
-		<s:hidden name="questionnaireID" />
+		<s:hidden name="questionnaire.questionnaireID" />
 		<s:textfield name="questionnaire.title" label="名称" />
 		<s:select label="类型" name="questionnaire.questionnaireType"
 			list="ddlQuestionnaireType" listKey="key" listValue="value"
-			value="TemperamentTest" />
+			value="questionnaire.questionnaireType" />
 		<s:textfield name="questionnaire.timeLimit" label="限时" />
 		<!-- 问题部分 -->
 		<s:submit value="Submit" />

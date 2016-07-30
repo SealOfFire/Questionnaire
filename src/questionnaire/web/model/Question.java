@@ -26,16 +26,16 @@ public class Question {
 		this.questionType = questionType.toString();
 	}
 
-	public String getQuestionID() {
-		return questionID;
-	}
-
 	/** 是否保存 */
 	public boolean notSaved() {
 		if (this.questionID == null || this.questionID.length() == 0)
 			return true;
 		else
 			return false;
+	}
+
+	public String getQuestionID() {
+		return questionID;
 	}
 
 	public void setQuestionID(String questionID) {

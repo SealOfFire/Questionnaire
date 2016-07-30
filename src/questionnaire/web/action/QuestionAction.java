@@ -75,8 +75,8 @@ public class QuestionAction extends ActionSupport {
 	/** 初始化下拉框的值 */
 	private void initDropDownList() {
 		this.ddlQuestionType = new ArrayList<ListItem>();
-		this.ddlQuestionType.add(new ListItem(QuestionnaireType.TemperamentTest));
-		this.ddlQuestionType.add(new ListItem(QuestionnaireType.SeatQuality));
+		this.ddlQuestionType.add(new ListItem(QuestionnaireType.TemperamentTest, "性格测试"));
+		this.ddlQuestionType.add(new ListItem(QuestionnaireType.SeatQuality, "坐席素质"));
 	}
 
 	public String getQuestionID() {

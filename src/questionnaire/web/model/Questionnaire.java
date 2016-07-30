@@ -17,7 +17,9 @@ public class Questionnaire {
 	private int timeLimit;
 
 	/** 类型(性格测试/坐席素质) */
-	private QuestionnaireType questionnaireType;
+	private String questionnaireType;
+
+	private String questionnaireTypeString;
 
 	public Questionnaire() {
 	}
@@ -26,7 +28,15 @@ public class Questionnaire {
 		this.questionnaireID = UUID.randomUUID().toString();
 		this.title = title;
 		this.timeLimit = timeLimit;
-		this.questionnaireType = questionnaireType;
+		this.questionnaireType = questionnaireType.toString();
+	}
+
+	/** 是否保存 */
+	public boolean notSaved() {
+		if (this.questionnaireID == null || this.questionnaireID.length() == 0)
+			return true;
+		else
+			return false;
 	}
 
 	public String getQuestionnaireID() {
@@ -53,11 +63,30 @@ public class Questionnaire {
 		this.timeLimit = timeLimit;
 	}
 
-	public QuestionnaireType getQuestionnaireType() {
+	public String getQuestionnaireType() {
 		return questionnaireType;
 	}
 
-	public void setQuestionnaireType(QuestionnaireType questionnaireType) {
+	public void setQuestionnaireType(String questionnaireType) {
 		this.questionnaireType = questionnaireType;
+	}
+
+	public String getQuestionnaireTypeString() {
+		switch (this.questionnaireType) {
+		case "TemperamentTest":
+			this.questionnaireTypeString = "性格测试";
+			break;
+		case "SeatQuality":
+			this.questionnaireTypeString = "坐席素质";
+			break;
+		default:
+			this.questionnaireTypeString = "";
+			break;
+		}
+		return this.questionnaireTypeString;
+	}
+
+	public void setQuestionnaireTypeString(String questionnaireTypeString) {
+		this.questionnaireTypeString = questionnaireTypeString;
 	}
 }
