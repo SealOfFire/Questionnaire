@@ -100,5 +100,13 @@
 			<result name="success" type="chain">QuestionEdit</result>
 		</action>
 		<!-- ############################ 选项处理 end ############################ -->
+		
+		<!-- ############################ 人员处理 start ############################ -->
+		<action name="PersonnelList" class="questionnaire.web.action.PersonnelAction"
+			method="list">
+			<result name="success">/pages/personnel/list.jsp</result>
+		</action>
+	
+		<!-- ############################ 人员处理 end ############################ -->
 	</package>
 </struts>
