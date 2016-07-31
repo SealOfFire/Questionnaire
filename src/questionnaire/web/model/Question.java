@@ -16,6 +16,8 @@ public class Question {
 
 	private String questionTypeString;
 
+	private int sort;
+
 	public Question() {
 		this.caption = "";
 		this.questionType = QuestionType.TemperamentTest.toString();
@@ -75,5 +77,13 @@ public class Question {
 
 	public void setQuestionTypeString(String questionTypeString) {
 		this.questionTypeString = questionTypeString;
+	}
+
+	public int getSort() {
+		return sort;
+	}
+
+	public void setSort(int sort) {
+		this.sort = sort;
 	}
 }

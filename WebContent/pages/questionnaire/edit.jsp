@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="scripts/common.js"></script>
 <title>问卷编辑</title>
 </head>
 <body>
@@ -18,7 +19,47 @@
 			value="questionnaire.questionnaireType" />
 		<s:textfield name="questionnaire.timeLimit" label="限时" />
 		<!-- 问题部分 -->
-		<s:submit value="Submit" />
+		<s:submit value="保存" />
 	</s:form>
+	<!-- --------------------- 问题部分 start --------------------- -->
+	<div>
+		<p>已选问题</p>
+		<table>
+			<tr>
+				<th>序号</th>
+				<th>内容</th>
+				<th>操作</th>
+			</tr>
+			<s:iterator value="questions" status="status">
+				<tr>
+					<td><s:property value="#status.index+1" /></td>
+					<td><s:property value="caption" /></td>
+					<td><a onclick="javascript:return p_del();"
+						href="<s:url action="QuestionnaireQuestionDelete"><s:param name="questionID" value="questionID"></s:param><s:param name="questionnaireID" value="questionnaireID"></s:param></s:url>">删除</a></td>
+				</tr>
+			</s:iterator>
+		</table>
+	</div>
+	<!-- --------------------- 问题部分 end --------------------- -->
+	<!-- --------------------- 被选题 start --------------------- -->
+	<div>
+		<p>备选问题</p>
+		<table>
+			<tr>
+				<th>序号</th>
+				<th>内容</th>
+				<th>操作</th>
+			</tr>
+			<s:iterator value="allQuestions" status="status">
+				<tr>
+					<td><s:property value="#status.index+1" /></td>
+					<td><s:property value="caption" /></td>
+					<td><a
+						href="<s:url action="QuestionnaireQuestionAdd"><s:param name="questionID" value="questionID"></s:param><s:param name="questionnaireID" value="questionnaireID"></s:param></s:url>">添加</a></td>
+				</tr>
+			</s:iterator>
+		</table>
+	</div>
+	<!-- --------------------- 被选题 end --------------------- -->
 </body>
 </html>

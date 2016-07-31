@@ -13,8 +13,16 @@ public class QuestionBLL {
 		return question;
 	}
 
-	public ArrayList<Question> selectAll() {
+	public ArrayList<Question> selectList(String questionnaireID) {
+		return new QuestionDAL().selectList(questionnaireID);
+	}
+
+	public ArrayList<Question> selectList() {
 		return new QuestionDAL().selectList();
+	}
+
+	public ArrayList<Question> selectNotAddList(String questionnaireID) {
+		return new QuestionDAL().selectNotAddList(questionnaireID);
 	}
 
 	public int delete(String questionID) {

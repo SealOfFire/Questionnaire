@@ -13,6 +13,10 @@ public class QuestionDAL extends BaseDAL {
 	private static final String UPDATE01 = "update Question set QuestionCategory=?,Caption=?,QuestionType=? where QuestionID=?";
 	private static final String DELETE01 = "delete from Question where QuestionID=?";
 	private static final String SELECT01 = "select QuestionID,QuestionCategory,Caption,QuestionType from Question";
+	private static final String SELECT02 = "select Question.QuestionID,Question.QuestionCategory,Question.Caption,QuestionType,QuestionnaireQuestion.Sort from Question "
+			+ " inner join QuestionnaireQuestion on Question.QuestionID=QuestionnaireQuestion.QuestionID and QuestionnaireID=?";
+	private static final String SELECT03 = "SELECT * FROM Question"
+			+ " where QuestionID not in(select QuestionID from questionnairequestion where QuestionnaireID=?)";
 
 	/** 问提插入到数据库 */
 	public int insert(String questionID, String caption, String questionType) {
@@ -59,6 +63,7 @@ public class QuestionDAL extends BaseDAL {
 			while (rs.next()) {
 				question.setQuestionID(rs.getString("QuestionID"));
 				question.setCaption(rs.getString("Caption"));
+				question.setQuestionType(rs.getString("QuestionType"));
 				question.setQuestionType(rs.getString("QuestionType"));
 			}
 
@@ -112,6 +117,133 @@ public class QuestionDAL extends BaseDAL {
 
 			conn = this.getConnect();
 			pstmt = conn.prepareStatement(SELECT01);
+
+			// 执行查询
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Question question = new Question();
+				question.setQuestionID(rs.getString("QuestionID"));
+				question.setCaption(rs.getString("Caption"));
+				question.setQuestionType(rs.getString("QuestionType"));
+				questions.add(question);
+			}
+
+			rs.close();
+			rs = null;
+			pstmt.close();
+			pstmt = null;
+			conn.close();
+			conn = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 出错时关闭连接
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				rs = null;
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				pstmt = null;
+			}
+
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				conn = null;
+			}
+		}
+		return questions;
+	}
+
+	/**  */
+	public ArrayList<Question> selectList(String questionnaireID) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Question> questions = new ArrayList<Question>();
+		try {
+
+			conn = this.getConnect();
+			pstmt = conn.prepareStatement(SELECT02);
+			pstmt.setString(1, questionnaireID);
+
+			// 执行查询
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Question question = new Question();
+				question.setQuestionID(rs.getString("QuestionID"));
+				question.setCaption(rs.getString("Caption"));
+				question.setQuestionType(rs.getString("QuestionType"));
+				question.setSort(rs.getInt("Sort"));
+				questions.add(question);
+			}
+
+			rs.close();
+			rs = null;
+			pstmt.close();
+			pstmt = null;
+			conn.close();
+			conn = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 出错时关闭连接
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				rs = null;
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				pstmt = null;
+			}
+
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				conn = null;
+			}
+		}
+		return questions;
+	}
+
+	/**  */
+	public ArrayList<Question> selectNotAddList(String questionnaireID) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Question> questions = new ArrayList<Question>();
+		try {
+
+			conn = this.getConnect();
+			pstmt = conn.prepareStatement(SELECT03);
+			pstmt.setString(1, questionnaireID);
 
 			// 执行查询
 			rs = pstmt.executeQuery();

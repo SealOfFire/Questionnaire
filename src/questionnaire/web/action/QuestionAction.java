@@ -26,7 +26,7 @@ public class QuestionAction extends ActionSupport {
 	/** 获取所有问题 */
 	public String getList() throws Exception {
 		// 查询所有问题
-		this.questions = new QuestionBLL().selectAll();
+		this.questions = new QuestionBLL().selectList();
 		return SUCCESS;
 	}
 

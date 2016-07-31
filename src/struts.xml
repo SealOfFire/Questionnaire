@@ -46,6 +46,16 @@
 			method="delete">
 			<result name="success" type="chain">QuestionnaireList</result>
 		</action>
+		
+		<action name="QuestionnaireQuestionAdd" class="questionnaire.web.action.QuestionnaireAction"
+			method="questionAdd">
+			<result name="success" type="chain">QuestionnaireEdit</result>
+		</action>
+		
+		<action name="QuestionnaireQuestionDelete" class="questionnaire.web.action.QuestionnaireAction"
+			method="questionDelete">
+			<result name="success" type="chain">QuestionnaireEdit</result>
+		</action>
 		<!-- ############################ 问卷处理 end ############################ -->
 
 		<!-- ############################ 问题处理 start ############################ -->
