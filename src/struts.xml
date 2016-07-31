@@ -12,11 +12,6 @@
 			<result>/index.jsp</result>
 		</action>
 
-		<action name="hello" class="questionnaire.web.action.HelloWorldAction"
-			method="execute">
-			<result name="success">/HelloWorld.jsp</result>
-		</action>
-
 		<!-- ############################ 问卷处理 start ############################ -->
 		<!-- 问卷一览 -->
 		<action name="QuestionnaireList" class="questionnaire.web.action.QuestionnaireAction"
@@ -46,12 +41,12 @@
 			method="delete">
 			<result name="success" type="chain">QuestionnaireList</result>
 		</action>
-		
+
 		<action name="QuestionnaireQuestionAdd" class="questionnaire.web.action.QuestionnaireAction"
 			method="questionAdd">
 			<result name="success" type="chain">QuestionnaireEdit</result>
 		</action>
-		
+
 		<action name="QuestionnaireQuestionDelete" class="questionnaire.web.action.QuestionnaireAction"
 			method="questionDelete">
 			<result name="success" type="chain">QuestionnaireEdit</result>
@@ -100,13 +95,17 @@
 			<result name="success" type="chain">QuestionEdit</result>
 		</action>
 		<!-- ############################ 选项处理 end ############################ -->
-		
+
 		<!-- ############################ 人员处理 start ############################ -->
-		<action name="PersonnelList" class="questionnaire.web.action.PersonnelAction"
+		<action name="InterviewList" class="questionnaire.web.action.InterviewAction"
 			method="list">
-			<result name="success">/pages/personnel/list.jsp</result>
+			<result name="success">/pages/interview/list.jsp</result>
 		</action>
-	
+
+		<action name="InterviewScore" class="questionnaire.web.action.InterviewAction"
+			method="score">
+			<result name="success">/pages/interview/score.jsp</result>
+		</action>
 		<!-- ############################ 人员处理 end ############################ -->
 	</package>
 </struts>

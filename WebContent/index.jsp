@@ -9,7 +9,7 @@
 </head>
 <body>
 	<p>
-		<a href="<s:url action='PersonnelList'/>">人员列表</a>
+		<a href="<s:url action='InterviewList'/>">面试列表</a>
 	</p>
 	<p>
 		<a href="<s:url action='QuestionnaireList'/>">问卷列表</a>
