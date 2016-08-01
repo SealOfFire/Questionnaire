@@ -17,5 +17,8 @@
 	<p>
 		<a href="<s:url action='QuestionList'/>">问题列表</a>
 	</p>
+	<p>
+		<a href="<s:url action='AnswerInit'/>">答题</a>
+	</p>
 </body>
 </html>

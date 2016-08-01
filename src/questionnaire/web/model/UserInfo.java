@@ -7,6 +7,13 @@ public class UserInfo {
 	private String IDCardNumber;
 	private String sex;
 
+	public boolean notSaved() {
+		if (this.userID == null || this.userID.length() == 0)
+			return true;
+		else
+			return false;
+	}
+
 	public String getUserID() {
 		return userID;
 	}

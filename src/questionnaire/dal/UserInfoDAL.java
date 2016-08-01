@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import questionnaire.web.model.UserInfo;
 
 public class UserInfoDAL extends BaseDAL {
 	private static final String SELECT01 = "select * from userinfo";
+	private static final String SELECT02 = "select * from userinfo where name=? and IDCardNumber=?";
+	private static final String INSERT01 = "insert into  userinfo(userID,name,phoneNumber,IDCardNumber,sex) values(?,?,?,?,?)";
 
 	public ArrayList<UserInfo> selectList() {
 		Connection conn = null;
@@ -71,5 +74,19 @@ public class UserInfoDAL extends BaseDAL {
 			}
 		}
 		return userInfos;
+	}
+
+	public int insert(String userID, String name, String phoneNumber, String IDCardNumber, String sex) {
+		ArrayList<Object> parameters = new ArrayList<Object>();
+		parameters.add(userID);
+		parameters.add(name);
+		parameters.add(phoneNumber);
+		parameters.add(IDCardNumber);
+		parameters.add(sex);
+		return this.modify(INSERT01, parameters.toArray());
+	}
+
+	public UserInfo select(String name, String IDCardNumber) {
+		return new UserInfo();
 	}
 }

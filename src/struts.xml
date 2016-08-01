@@ -107,5 +107,17 @@
 			<result name="success">/pages/interview/score.jsp</result>
 		</action>
 		<!-- ############################ 人员处理 end ############################ -->
+
+		<!-- ############################ 答题start ############################ -->
+		<action name="AnswerInit" class="questionnaire.web.action.AnswerAction"
+			method="initAnswer">
+			<result name="success">/pages/answer/userRegister.jsp</result>
+		</action>
+
+		<action name="AnswerRegister" class="questionnaire.web.action.AnswerAction"
+			method="register">
+			<result name="success">/pages/answer/userRegister.jsp</result>
+		</action>
+		<!-- ############################ 答题 end ############################ -->
 	</package>
 </struts>
