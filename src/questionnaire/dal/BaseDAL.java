@@ -2,12 +2,9 @@ package questionnaire.dal;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Types;
 
 public class BaseDAL {
 	private final static String connectionString = "jdbc:mysql://localhost/questionnairedb?user=root&password=root&characterEncoding=utf8&useSSL=false&serverTimezone=GMT";

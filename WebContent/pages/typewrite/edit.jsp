@@ -8,21 +8,32 @@
 <script type="text/javascript" src="scripts/html2canvas.js"></script>
 <script>
 	function screenshot() {
-		html2canvas(element, {
-			onrendered : function(canvas) {
-				// canvas 是最后一个渲染的<canvas> 元素
-				var url = canvas.toDataURL();
-			}
-		});
+		html2canvas(
+				document.getElementsByName("typewrite.captionText")[0],
+				{
+					onrendered : function(canvas) {
+						// document.body.appendChild(canvas);
+						var myImage = canvas.toDataURL("image/jpeg");
+						document.getElementsByName("typewrite.captionImage")[0].value = myImage;
+						document.getElementById("form").submit();
+					}
+				});
+		//var canvas = html2canvas(comments);
+		//alert(canvas);
 	}
 </script>
 <title>编辑问题</title>
 </head>
 <body>
 	<a href="<s:url action='TypewriteList'/>">返回</a>
-	<s:form action="TypewriteSave">
-		<s:textarea label="内容" name="comments" cols="50" rows="20" />
-		<s:submit onclick="javascript:alert();" value="保存" />
+	<s:form id="form" action="TypewriteSave">
+		<s:hidden name="typewrite.questionID" />
+		<s:hidden name="typewrite.captionImage" />
+		<s:textfield name="typewrite.title" label="标题" />
+		<!-- <input type="hidden" name="hidImg" id="hidImg" value="" /> -->
+		<s:textarea label="内容" id="typewrite.captionText"
+			name="typewrite.captionText" cols="50" rows="20" />
 	</s:form>
+	<input type="button" onclick="javascript:screenshot();" value="保存">
 </body>
 </html>
