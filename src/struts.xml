@@ -116,8 +116,35 @@
 
 		<action name="AnswerRegister" class="questionnaire.web.action.AnswerAction"
 			method="register">
-			<result name="success">/pages/answer/userRegister.jsp</result>
+			<result name="success">/pages/answer/answer.jsp</result>
 		</action>
 		<!-- ############################ 答题 end ############################ -->
+
+		<!-- ############################ 打字题start ############################ -->
+		<action name="TypewriteList" class="questionnaire.web.action.TypewriteAction"
+			method="list">
+			<result name="success">/pages/typewrite/list.jsp</result>
+		</action>
+
+		<action name="TypewriteCreate" class="questionnaire.web.action.TypewriteAction"
+			method="create">
+			<result name="success">/pages/typewrite/edit.jsp</result>
+		</action>
+
+		<action name="TypewriteEdit" class="questionnaire.web.action.TypewriteAction"
+			method="edit">
+			<result name="success">/pages/typewrite/edit.jsp</result>
+		</action>
+
+		<action name="TypewriteSave" class="questionnaire.web.action.TypewriteAction"
+			method="save">
+			<result name="success" type="chain">TypewriteEdit</result>
+		</action>
+
+		<action name="TypewriteDelete" class="questionnaire.web.action.TypewriteAction"
+			method="delete">
+			<result name="success" type="chain">TypewriteList</result>
+		</action>
+		<!-- ############################ 大字题end ############################ -->
 	</package>
 </struts>

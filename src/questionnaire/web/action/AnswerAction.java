@@ -31,6 +31,7 @@ public class AnswerAction extends ActionSupport {
 			selectedUserInfo = userInfoBll.insert(this.userInfo);
 		} else {
 			// 已存在,查看答题进度
+
 		}
 		// 用户信息添加到session
 		// ActionContext.getContext().getSession().put("userInfo",

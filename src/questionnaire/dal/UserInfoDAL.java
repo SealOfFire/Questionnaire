@@ -87,6 +87,63 @@ public class UserInfoDAL extends BaseDAL {
 	}
 
 	public UserInfo select(String name, String IDCardNumber) {
-		return new UserInfo();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		UserInfo userInfo = new UserInfo();
+		try {
+
+			conn = this.getConnect();
+			pstmt = conn.prepareStatement(SELECT01);
+
+			// 执行查询
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				userInfo.setUserID(rs.getString("UserID"));
+				userInfo.setName(rs.getString("Name"));
+				userInfo.setPhoneNumber(rs.getString("PhoneNumber"));
+				userInfo.setIDCardNumber(rs.getString("IDCardNumber"));
+				userInfo.setSex(rs.getString("Sex"));
+			}
+
+			rs.close();
+			rs = null;
+			pstmt.close();
+			pstmt = null;
+			conn.close();
+			conn = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 出错时关闭连接
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				rs = null;
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				pstmt = null;
+			}
+
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				conn = null;
+			}
+		}
+		return userInfo;
 	}
 }
