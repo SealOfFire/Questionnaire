@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import questionnaire.web.model.UserInfo;
 
@@ -94,7 +93,9 @@ public class UserInfoDAL extends BaseDAL {
 		try {
 
 			conn = this.getConnect();
-			pstmt = conn.prepareStatement(SELECT01);
+			pstmt = conn.prepareStatement(SELECT02);
+			pstmt.setString(1, name);
+			pstmt.setString(2, IDCardNumber);
 
 			// 执行查询
 			rs = pstmt.executeQuery();
