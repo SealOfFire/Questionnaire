@@ -21,6 +21,9 @@
 		<a href="<s:url action='TypewriteList'/>">打字题列表</a>
 	</p>
 	<p>
+		<a href="<s:url action='QuestionnairePartsEdit'/>">编辑试卷</a>
+	</p>
+	<p>
 		<a href="<s:url action='AnswerInit'/>">答题</a>
 	</p>
 </body>

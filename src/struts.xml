@@ -146,5 +146,13 @@
 			<result name="success" type="chain">TypewriteList</result>
 		</action>
 		<!-- ############################ 大字题end ############################ -->
+
+		<!-- ############################ 试题组start ############################ -->
+		<action name="QuestionnairePartsEdit"
+			class="questionnaire.web.action.QuestionnairePartsAction" method="edit">
+			<result name="success">/pages/questionnaireParts/edit.jsp
+			</result>
+		</action>
+		<!-- ############################ 试题组end ############################ -->
 	</package>
 </struts>

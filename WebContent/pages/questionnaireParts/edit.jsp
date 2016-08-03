@@ -5,9 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>试卷组编辑</title>
 </head>
 <body>
-
+	性格测试
+	<button id="btnCreateOption">选择</button>
+	<br />坐席素质
+	<button id="btnCreateOption">选择</button>
+	<br />打字测试
+	<button id="btnCreateOption">选择</button>
+	<br />
 </body>
 </html>
