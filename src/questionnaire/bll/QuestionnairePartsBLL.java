@@ -27,22 +27,14 @@ public class QuestionnairePartsBLL {
 	/**  */
 	public Questionnaire selectPart1() {
 		String questionnaireID = new QuestionnairePartsDAL().select(0);
-		Questionnaire questionnaire = new QuestionnaireDAL().select(questionnaireID);
-		questionnaire.setQuestions(new QuestionBLL().selectList(questionnaire.getQuestionnaireID()));
-		for (Question question : questionnaire.getQuestions()) {
-			question.setOptions(new OptionBLL().selectList(question.getQuestionID()));
-		}
+		Questionnaire questionnaire = new QuestionnaireBLL().selectIncludeQuestions(questionnaireID);
 		return questionnaire;
 	}
 
 	/**  */
 	public Questionnaire selectPart2() {
 		String questionnaireID = new QuestionnairePartsDAL().select(1);
-		Questionnaire questionnaire = new QuestionnaireDAL().select(questionnaireID);
-		questionnaire.setQuestions(new QuestionBLL().selectList(questionnaire.getQuestionnaireID()));
-		for (Question question : questionnaire.getQuestions()) {
-			question.setOptions(new OptionBLL().selectList(question.getQuestionID()));
-		}
+		Questionnaire questionnaire = new QuestionnaireBLL().selectIncludeQuestions(questionnaireID);
 		return questionnaire;
 	}
 

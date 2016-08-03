@@ -4,12 +4,23 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import questionnaire.dal.QuestionnaireDAL;
+import questionnaire.web.model.Question;
 import questionnaire.web.model.Questionnaire;
 
 public class QuestionnaireBLL {
 
 	public Questionnaire select(String questionnaireID) {
 		Questionnaire questionnaire = new QuestionnaireDAL().select(questionnaireID);
+		return questionnaire;
+	}
+
+	/**  */
+	public Questionnaire selectIncludeQuestions(String questionnaireID) {
+		Questionnaire questionnaire = new QuestionnaireDAL().select(questionnaireID);
+		questionnaire.setQuestions(new QuestionBLL().selectList(questionnaire.getQuestionnaireID()));
+		for (Question question : questionnaire.getQuestions()) {
+			question.setOptions(new OptionBLL().selectList(question.getQuestionID()));
+		}
 		return questionnaire;
 	}
 
