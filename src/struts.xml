@@ -153,6 +153,11 @@
 			<result name="success">/pages/questionnaireParts/edit.jsp
 			</result>
 		</action>
+
+		<action name="QuestionnairePartsSave"
+			class="questionnaire.web.action.QuestionnairePartsAction" method="save">
+			<result name="success" type="chain">QuestionnairePartsEdit</result>
+		</action>
 		<!-- ############################ 试题组end ############################ -->
 	</package>
 </struts>
