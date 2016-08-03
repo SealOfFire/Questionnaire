@@ -1,5 +1,6 @@
 package questionnaire.web.model;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import questionnaire.web.enumeration.QuestionnaireType;
@@ -20,6 +21,8 @@ public class Questionnaire {
 	private String questionnaireType;
 
 	private String questionnaireTypeString;
+
+	private ArrayList<Question> questions;
 
 	public Questionnaire() {
 	}
@@ -88,5 +91,13 @@ public class Questionnaire {
 
 	public void setQuestionnaireTypeString(String questionnaireTypeString) {
 		this.questionnaireTypeString = questionnaireTypeString;
+	}
+
+	public ArrayList<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(ArrayList<Question> questions) {
+		this.questions = questions;
 	}
 }

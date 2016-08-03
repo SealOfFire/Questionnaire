@@ -1,5 +1,7 @@
 package questionnaire.web.model;
 
+import java.util.ArrayList;
+
 import questionnaire.web.enumeration.QuestionType;
 
 /** 问题 */
@@ -17,6 +19,8 @@ public class Question {
 	private String questionTypeString;
 
 	private int sort;
+
+	private ArrayList<Option> options;
 
 	public Question() {
 		this.caption = "";
@@ -85,5 +89,13 @@ public class Question {
 
 	public void setSort(int sort) {
 		this.sort = sort;
+	}
+
+	public ArrayList<Option> getOptions() {
+		return options;
+	}
+
+	public void setOptions(ArrayList<Option> options) {
+		this.options = options;
 	}
 }
