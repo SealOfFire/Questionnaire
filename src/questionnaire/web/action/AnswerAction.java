@@ -2,7 +2,6 @@ package questionnaire.web.action;
 
 import java.util.ArrayList;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import questionnaire.bll.UserInfoBLL;

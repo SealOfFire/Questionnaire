@@ -1,6 +1,5 @@
 package questionnaire.bll;
 
-import questionnaire.dal.QuestionDAL;
 import questionnaire.dal.QuestionnaireDAL;
 import questionnaire.dal.QuestionnairePartsDAL;
 import questionnaire.dal.TypewriteDAL;
