@@ -1,5 +1,6 @@
 package questionnaire.dal;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ public class OptionDAL extends BaseDAL {
 	private static final String SELECT01 = "select OptionID,QuestionID,Caption,Score,Sort from `Option` where QuestionID=? order by Sort";
 	private static final String SELECT02 = "select max(Sort) from `Option` where QuestionID=?";
 
-	public Option insert(String optionID, String questionID, String caption, int score) {
+	public Option insert(String optionID, String questionID, String caption, BigDecimal score) {
 		Connection conn = null;
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
@@ -37,7 +38,7 @@ public class OptionDAL extends BaseDAL {
 			pstmt2.setString(1, optionID);
 			pstmt2.setString(2, questionID);
 			pstmt2.setString(3, caption);
-			pstmt2.setInt(4, score);
+			pstmt2.setBigDecimal(4, score);
 			pstmt2.setInt(5, sort);
 			value = pstmt2.executeUpdate();
 
@@ -117,7 +118,7 @@ public class OptionDAL extends BaseDAL {
 				option.setOptionID(rs.getString("OptionID"));
 				option.setQuestionID(rs.getString("QuestionID"));
 				option.setCaption(rs.getString("Caption"));
-				option.setScore(rs.getInt("Score"));
+				option.setScore(rs.getBigDecimal("Score"));
 				option.setSort(rs.getInt("Sort"));
 				options.add(option);
 			}

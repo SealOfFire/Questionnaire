@@ -36,14 +36,14 @@ public class QuestionnaireBLL {
 	public Questionnaire insert(Questionnaire questionnaire) {
 		questionnaire.setQuestionnaireID(UUID.randomUUID().toString());
 		new QuestionnaireDAL().insert(questionnaire.getQuestionnaireID(), questionnaire.getTitle(),
-				questionnaire.getTimeLimit(), questionnaire.getQuestionnaireType());
+				questionnaire.getDescription(), questionnaire.getTimeLimit(), questionnaire.getQuestionnaireType());
 		return questionnaire;
 	}
 
 	/** 更新数据 */
 	public Questionnaire update(Questionnaire questionnaire) {
 		new QuestionnaireDAL().update(questionnaire.getQuestionnaireID(), questionnaire.getTitle(),
-				questionnaire.getTimeLimit(), questionnaire.getQuestionnaireType());
+				questionnaire.getDescription(), questionnaire.getTimeLimit(), questionnaire.getQuestionnaireType());
 		return questionnaire;
 	}
 

@@ -10,28 +10,32 @@ import questionnaire.web.model.Questionnaire;
 /** 问卷数据库操作 */
 public class QuestionnaireDAL extends BaseDAL {
 
-	private static final String INSERT01 = "insert into Questionnaire(QuestionnaireID,Title,TimeLimit,QuestionnaireType) values(?,?,?,?)";
+	private static final String INSERT01 = "insert into Questionnaire(QuestionnaireID,Title,Description,TimeLimit,QuestionnaireType) values(?,?,?,?,?)";
 	private static final String INSERT02 = "insert into QuestionnaireQuestion(QuestionnaireID,QuestionID,Sort) values(?,?,?)";
-	private static final String UPDATE01 = "update Questionnaire set Title=?,TimeLimit=?,QuestionnaireType=? where QuestionnaireID=?";
+	private static final String UPDATE01 = "update Questionnaire set Title=?,Description=?,TimeLimit=?,QuestionnaireType=? where QuestionnaireID=?";
 	private static final String DELETE01 = "delete from Questionnaire where QuestionnaireID=?";
 	private static final String DELETE02 = "delete from QuestionnaireQuestion where QuestionnaireID=? and QuestionID=?";
-	private static final String SELECT01 = "select QuestionnaireID,Title,TimeLimit,QuestionnaireType from questionnaire";
+	private static final String SELECT01 = "select * from questionnaire";
 	private static final String SELECT02 = "select max(sort) from QuestionnaireQuestion where QuestionnaireID=?";
 
 	/** 插入到数据库 */
-	public int insert(String questionnaireID, String title, int timeLimit, String questionnaireType) {
+	public int insert(String questionnaireID, String title, String description, int timeLimit,
+			String questionnaireType) {
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(questionnaireID);
 		parameters.add(title);
+		parameters.add(description);
 		parameters.add(timeLimit);
 		parameters.add(questionnaireType);
 		return this.modify(INSERT01, parameters.toArray());
 	}
 
 	/** 更新 */
-	public int update(String questionnaireID, String title, int timeLimit, String questionnaireType) {
+	public int update(String questionnaireID, String title, String description, int timeLimit,
+			String questionnaireType) {
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(title);
+		parameters.add(description);
 		parameters.add(timeLimit);
 		parameters.add(questionnaireType);
 		parameters.add(questionnaireID);
@@ -63,6 +67,7 @@ public class QuestionnaireDAL extends BaseDAL {
 			while (rs.next()) {
 				questionnaire.setQuestionnaireID(rs.getString("QuestionnaireID"));
 				questionnaire.setTitle(rs.getString("Title"));
+				questionnaire.setDescription(rs.getString("description"));
 				questionnaire.setTimeLimit(rs.getInt("TimeLimit"));
 				questionnaire.setQuestionnaireType(rs.getString("QuestionnaireType"));
 			}
@@ -125,6 +130,7 @@ public class QuestionnaireDAL extends BaseDAL {
 				Questionnaire questionnaire = new Questionnaire();
 				questionnaire.setQuestionnaireID(rs.getString("QuestionnaireID"));
 				questionnaire.setTitle(rs.getString("Title"));
+				questionnaire.setDescription(rs.getString("description"));
 				questionnaire.setTimeLimit(rs.getInt("TimeLimit"));
 				questionnaire.setQuestionnaireType(rs.getString("QuestionnaireType"));
 				questionnaires.add(questionnaire);

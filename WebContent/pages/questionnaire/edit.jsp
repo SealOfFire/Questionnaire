@@ -14,6 +14,8 @@
 		<!-- 问卷部分 -->
 		<s:hidden name="questionnaire.questionnaireID" />
 		<s:textfield name="questionnaire.title" label="名称" />
+		<s:textarea label="内容" id="questionnaire.description"
+			name="questionnaire.description" cols="15" rows="3" />
 		<s:select label="类型" name="questionnaire.questionnaireType"
 			list="ddlQuestionnaireType" listKey="key" listValue="value"
 			value="questionnaire.questionnaireType" />

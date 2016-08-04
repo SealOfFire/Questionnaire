@@ -14,6 +14,9 @@ public class Questionnaire {
 	/** 问卷标题 */
 	private String title;
 
+	/** 描述 */
+	private String description;
+
 	/** 答卷时限 */
 	private int timeLimit;
 
@@ -99,5 +102,13 @@ public class Questionnaire {
 
 	public void setQuestions(ArrayList<Question> questions) {
 		this.questions = questions;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }
