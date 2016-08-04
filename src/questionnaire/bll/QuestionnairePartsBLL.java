@@ -1,9 +1,7 @@
 package questionnaire.bll;
 
-import questionnaire.dal.QuestionnaireDAL;
 import questionnaire.dal.QuestionnairePartsDAL;
 import questionnaire.dal.TypewriteDAL;
-import questionnaire.web.model.Question;
 import questionnaire.web.model.Questionnaire;
 import questionnaire.web.model.Typewrite;
 

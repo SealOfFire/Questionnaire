@@ -6,6 +6,7 @@
 <struts>
 
 	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ui.theme" value="simple" />
 
 	<package name="Questionnaire" extends="struts-default">
 		<action name="index">
@@ -117,6 +118,16 @@
 		<action name="AnswerRegister" class="questionnaire.web.action.AnswerAction"
 			method="register">
 			<result name="success">/pages/answer/answer.jsp</result>
+		</action>
+
+		<action name="ExaminationInit" class="questionnaire.web.action.ExaminationAction"
+			method="init">
+			<result name="success">/pages/answer/examination.jsp</result>
+		</action>
+
+		<action name="ExaminationSave" class="questionnaire.web.action.ExaminationAction"
+			method="save">
+			<result name="success">/pages/answer/examination.jsp</result>
 		</action>
 		<!-- ############################ 答题 end ############################ -->
 

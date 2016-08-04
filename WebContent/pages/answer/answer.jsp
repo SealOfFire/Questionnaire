@@ -8,6 +8,8 @@
 <title>答题</title>
 </head>
 <body>
-
+	<s:form action="">
+	
+	</s:form>
 </body>
 </html>
