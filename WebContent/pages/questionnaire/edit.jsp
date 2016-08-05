@@ -13,14 +13,19 @@
 	<s:form action="QuestionnaireSave">
 		<!-- 问卷部分 -->
 		<s:hidden name="questionnaire.questionnaireID" />
-		<s:textfield name="questionnaire.title" label="名称" />
-		<s:textarea label="内容" id="questionnaire.description"
+		名称:<s:textfield name="questionnaire.title" label="名称" />
+		<br />
+		内容:<s:textarea label="内容" id="questionnaire.description"
 			name="questionnaire.description" cols="15" rows="3" />
+		<br />
+		类型:
 		<s:select label="类型" name="questionnaire.questionnaireType"
 			list="ddlQuestionnaireType" listKey="key" listValue="value"
 			value="questionnaire.questionnaireType" />
+		<br />
+		时限:
 		<s:textfield name="questionnaire.timeLimit" label="限时" />
-		<!-- 问题部分 -->
+		<br />
 		<s:submit value="保存" />
 	</s:form>
 	<!-- --------------------- 问题部分 start --------------------- -->

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<s:form action="ExaminationSave">
-		<s:hidden name="questionnaire.questionnaireID" />
+		<s:hidden name="questionnaireID" />
 		试卷标题:
 		<s:property value="questionnaire.title" />
 		<br /> 试卷描述:

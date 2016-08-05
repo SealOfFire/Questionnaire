@@ -2,7 +2,7 @@ package questionnaire.web.enumeration;
 
 public enum QuestionType {
 
-	TemperamentTest("TemperamentTest"), SeatQuality("TemperamentTest");
+	TemperamentTest("TemperamentTest"), SeatQuality("SeatQuality");
 
 	private final String value;
 

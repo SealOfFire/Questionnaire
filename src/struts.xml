@@ -13,6 +13,10 @@
 			<result>/index.jsp</result>
 		</action>
 
+		<action name="test">
+			<result type="freemarker">/pages/test.ftl</result>
+		</action>
+
 		<!-- ############################ 问卷处理 start ############################ -->
 		<!-- 问卷一览 -->
 		<action name="QuestionnaireList" class="questionnaire.web.action.QuestionnaireAction"

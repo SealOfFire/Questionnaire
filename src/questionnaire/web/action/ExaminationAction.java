@@ -1,5 +1,10 @@
 package questionnaire.web.action;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import questionnaire.bll.QuestionnaireBLL;
@@ -21,15 +26,17 @@ public class ExaminationAction extends ActionSupport {
 
 	public String save() {
 		this.questionnaire = new QuestionnaireBLL().selectIncludeQuestions(this.questionnaireID);
-		/*for (Question question : this.questionnaire.getQuestions()) {
+		// HttpServletRequest request = (HttpServletRequest)
+		// ActionContext.getContext().get("request");
+		HttpServletRequest request = ServletActionContext.getRequest();
+		for (Question question : this.questionnaire.getQuestions()) {
 			System.out.println(request.getParameter("questionID" + question.getQuestionID()));
 		}
-		for (int i = 0; i < s.length; i++) {
 
-		}*/
 		return SUCCESS;
 	}
 
+	// --------------------- GETTER / SETTER METHODS ---------------------
 	public String getQuestionnaireID() {
 		return questionnaireID;
 	}
