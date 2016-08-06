@@ -1,0 +1,4 @@
+输入验证
+log
+hibernate
+增加历史记录
