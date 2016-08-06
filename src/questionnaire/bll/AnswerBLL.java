@@ -2,6 +2,7 @@ package questionnaire.bll;
 
 import questionnaire.dal.AnswerDAL;
 import questionnaire.dal.QuestionnairePartsDAL;
+import questionnaire.web.model.Answer;
 
 public class AnswerBLL {
 
@@ -15,5 +16,19 @@ public class AnswerBLL {
 			}
 		}
 		return result;
+	}
+
+	public boolean answerProgress(String userID, String questionnaireID) {
+		if (new AnswerDAL().selectCount(userID, questionnaireID) > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public int replace(Answer answer) {
+		return new AnswerDAL().replace(answer.getUserID(), answer.getQuestionnaireID(), answer.getQuestionID(),
+				answer.getQptionID(), answer.getAnswer(), answer.getBeginDate(), answer.getEndDate(),
+				answer.getScore());
 	}
 }

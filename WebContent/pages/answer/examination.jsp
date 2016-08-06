@@ -17,6 +17,7 @@
 	<div class="container">
 		<s:form action="ExaminationSave">
 			<s:hidden name="questionnaireID" />
+			<s:hidden name="userID" />
 			<h1>
 				<s:property value="questionnaire.title" />
 			</h1>

@@ -45,8 +45,9 @@ public class AnswerAction extends ActionSupport {
 		} else if (!answerProgress[2]) {
 			// 跳到打字题
 			return "typewrite";
-		} else {
+		} else if (answerProgress[2]) {
 			// 所有题都已经答完
+			return "finish";
 		}
 
 		// 开始答题

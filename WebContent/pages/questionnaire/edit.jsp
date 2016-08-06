@@ -73,50 +73,54 @@
 		<!-- --------------------- 问卷部分 end --------------------- -->
 
 		<!-- --------------------- 问题部分 start --------------------- -->
-		<div class="panel panel-default panel-primary">
-			<div class="panel-heading">已选问题</div>
-			<div class="panel-body"></div>
-			<table class="table table-striped table-bordered table-hover table-responsive">
-				<tr>
-					<th style="text-align: center;" class="col-sm-1">序号</th>
-					<th style="text-align: center;">内容</th>
-					<th style="text-align: center;" class="col-sm-1">操作</th>
-				</tr>
-				<s:iterator value="questions" status="status">
+		<s:if test="questions.size()>0">
+			<div class="panel panel-default panel-primary">
+				<div class="panel-heading">已选问题</div>
+				<div class="panel-body"></div>
+				<table class="table table-striped table-bordered table-hover table-responsive">
 					<tr>
-						<td style="text-align: center;"><s:property value="#status.index+1" /></td>
-						<td><s:property value="caption" /></td>
-						<td style="text-align: center;"><a href="<s:url action="QuestionEdit">
-						<s:param name="questionID" value="questionID"></s:param></s:url>">编辑</a>&nbsp;<a
-							onclick="javascript:return p_del();"
-							href="<s:url action="QuestionnaireQuestionDelete"><s:param name="questionID" value="questionID"></s:param><s:param name="questionnaireID" value="questionnaireID"></s:param></s:url>">删除</a></td>
+						<th style="text-align: center;" class="col-sm-1">序号</th>
+						<th style="text-align: center;">内容</th>
+						<th style="text-align: center;" class="col-sm-1">操作</th>
 					</tr>
-				</s:iterator>
-			</table>
-		</div>
+					<s:iterator value="questions" status="status">
+						<tr>
+							<td style="text-align: center;"><s:property value="#status.index+1" /></td>
+							<td><s:property value="caption" /></td>
+							<td style="text-align: center;"><a href="<s:url action="QuestionEdit">
+						<s:param name="questionID" value="questionID"></s:param></s:url>">编辑</a>&nbsp;<a
+								onclick="javascript:return p_del();"
+								href="<s:url action="QuestionnaireQuestionDelete"><s:param name="questionID" value="questionID"></s:param><s:param name="questionnaireID" value="questionnaireID"></s:param></s:url>">删除</a></td>
+						</tr>
+					</s:iterator>
+				</table>
+			</div>
+		</s:if>
 		<!-- --------------------- 问题部分 end --------------------- -->
 
 		<!-- --------------------- 被选题 start --------------------- -->
-		<div class="panel panel-default panel-primary">
-			<div class="panel-heading">备选问题</div>
-			<div class="panel-body"></div>
-			<table class="table table-striped table-bordered table-hover table-responsive">
-				<tr>
-					<th style="text-align: center;" class="col-sm-1">序号</th>
-					<th style="text-align: center;">内容</th>
-					<th style="text-align: center;" class="col-sm-1">操作</th>
-				</tr>
-				<s:iterator value="allQuestions" status="status">
+		<s:if test="questionnaire">
+			<div class="panel panel-default panel-primary">
+				<div class="panel-heading">备选问题</div>
+				<div class="panel-body"></div>
+				<table class="table table-striped table-bordered table-hover table-responsive">
 					<tr>
-						<td style="text-align: center;"><s:property value="#status.index+1" /></td>
-						<td><s:property value="caption" /></td>
-						<td style="text-align: center;"><a href="<s:url action="QuestionEdit">
-						<s:param name="questionID" value="questionID"></s:param></s:url>">编辑</a>&nbsp;<a
-							href="<s:url action="QuestionnaireQuestionAdd"><s:param name="questionID" value="questionID"></s:param><s:param name="questionnaireID" value="questionnaireID"></s:param></s:url>">添加</a></td>
+						<th style="text-align: center;" class="col-sm-1">序号</th>
+						<th style="text-align: center;">内容</th>
+						<th style="text-align: center;" class="col-sm-1">操作</th>
 					</tr>
-				</s:iterator>
-			</table>
-		</div>
+					<s:iterator value="allQuestions" status="status">
+						<tr>
+							<td style="text-align: center;"><s:property value="#status.index+1" /></td>
+							<td><s:property value="caption" /></td>
+							<td style="text-align: center;"><a href="<s:url action="QuestionEdit">
+						<s:param name="questionID" value="questionID"></s:param></s:url>">编辑</a>&nbsp;<a
+								href="<s:url action="QuestionnaireQuestionAdd"><s:param name="questionID" value="questionID"></s:param><s:param name="questionnaireID" value="questionnaireID"></s:param></s:url>">添加</a></td>
+						</tr>
+					</s:iterator>
+				</table>
+			</div>
+		</s:if>
 		<!-- --------------------- 被选题 end --------------------- -->
 	</div>
 </body>
