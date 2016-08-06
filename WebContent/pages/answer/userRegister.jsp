@@ -16,9 +16,9 @@
 </head>
 <body>
 	<div class="container">
-		<h1>用户信息收集</h1>
+		<h1>人员信息收集</h1>
 		<div class="panel panel-default panel-primary">
-			<div class="panel-heading">题目编辑</div>
+			<div class="panel-heading">人员信息</div>
 			<div class="panel-body">
 				<s:form class="form-horizontal" action="AnswerRegister">
 					<div class="form-group">
@@ -27,28 +27,24 @@
 							<s:textfield class="form-control" name="userInfo.name" />
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label class="col-sm-1 control-label">电话</label>
 						<div class="col-sm-11">
 							<s:textfield class="form-control" name="userInfo.phoneNumber" />
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label class="col-sm-1 control-label">身份证号</label>
 						<div class="col-sm-11">
 							<s:textfield class="form-control" name="userInfo.IDCardNumber" />
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label class="col-sm-1 control-label">性别</label>
 						<div class="col-sm-1">
 							<s:select class="form-control" name="userInfo.sex" label="性别" list="ddlSex" listKey="key" listValue="value" value="userInfo.sex" />
 						</div>
 					</div>
-
 					<div class="form-group">
 						<div class="col-sm-offset-1 col-sm-10">
 							<s:submit class="btn btn-primary" value="保存" />

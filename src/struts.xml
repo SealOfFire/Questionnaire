@@ -121,9 +121,12 @@
 
 		<action name="AnswerRegister" class="questionnaire.web.action.AnswerAction"
 			method="register">
-			<result name="success">/pages/answer/answer.jsp</result>
+			<result name="success" type="chain">ExaminationInit</result>
+			<result name="select" type="chain">ExaminationInit</result>
+			<result name="typewrite" type="chain">ExaminationInit</result>
 		</action>
 
+		<!-- 选择题 -->
 		<action name="ExaminationInit" class="questionnaire.web.action.ExaminationAction"
 			method="init">
 			<result name="success">/pages/answer/examination.jsp</result>
@@ -133,6 +136,8 @@
 			method="save">
 			<result name="success">/pages/answer/examination.jsp</result>
 		</action>
+		<!-- 打字题 -->
+
 		<!-- ############################ 答题 end ############################ -->
 
 		<!-- ############################ 打字题start ############################ -->

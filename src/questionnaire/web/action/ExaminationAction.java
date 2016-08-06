@@ -6,19 +6,30 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import questionnaire.bll.AnswerBLL;
 import questionnaire.bll.QuestionnaireBLL;
+import questionnaire.bll.QuestionnairePartsBLL;
 import questionnaire.web.model.Question;
 import questionnaire.web.model.Questionnaire;
 
 public class ExaminationAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
-	// localhost:8080/Questionnaire/ExaminationInit?questionnaireID=618f7ee9-8447-4244-9838-10770fc317ab
+	private String userID = null;
 	private String questionnaireID = null;
 	private Questionnaire questionnaire = null;
 
 	public String init() {
-		this.questionnaire = new QuestionnaireBLL().selectIncludeQuestions(this.questionnaireID);
+		// 获取答题进度
+		boolean[] answerProgress = new AnswerBLL().answerProgress(this.userID);
+		if (!answerProgress[0]) {
+			// 从第一部分开始
+			this.questionnaire = new QuestionnairePartsBLL().selectPart1();
+		} else if (!answerProgress[1]) {
+			// 从第二部分开始
+			this.questionnaire = new QuestionnairePartsBLL().selectPart2();
+		}
+		this.questionnaire = new QuestionnaireBLL().selectIncludeQuestions(this.questionnaire.getQuestionnaireID());
 
 		return SUCCESS;
 	}
@@ -50,5 +61,13 @@ public class ExaminationAction extends ActionSupport {
 
 	public void setQuestionnaire(Questionnaire questionnaire) {
 		this.questionnaire = questionnaire;
+	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 }
