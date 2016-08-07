@@ -16,13 +16,14 @@
 		<action name="test">
 			<result type="freemarker">/pages/test.ftl</result>
 		</action>
-		
+
 		<!-- 登陆 -->
 		<action name="index">
-			<result >/pages/login.jsp</result>
+			<result>/pages/login.jsp</result>
 		</action>
-		
-		<action name="login" class="questionnaire.web.action.LoginAction" method="login">
+
+		<action name="login" class="questionnaire.web.action.LoginAction"
+			method="login">
 			<result name="login" type="chain">InterviewList</result>
 			<result name="error" type="chain">index</result>
 		</action>
@@ -112,15 +113,20 @@
 		<!-- ############################ 选项处理 end ############################ -->
 
 		<!-- ############################ 人员处理 start ############################ -->
-		<action name="InterviewList" class="questionnaire.web.action.InterviewAction"
-			method="list">
-			<result name="success">/pages/interview/list.jsp</result>
-		</action>
+	<action name="InterviewList" class="questionnaire.web.action.InterviewAction"
+		method="list">
+		<result name="success">/pages/interview/list.jsp</result>
+	</action>
 
-		<action name="InterviewScore" class="questionnaire.web.action.InterviewAction"
-			method="score">
-			<result name="success">/pages/interview/score.jsp</result>
-		</action>
+	<action name="InterviewScore" class="questionnaire.web.action.InterviewAction"
+		method="score">
+		<result name="success">/pages/interview/score.jsp</result>
+	</action>
+
+	<action name="InterviewSave" class="questionnaire.web.action.InterviewAction"
+		method="save">
+		<result name="success" type="chain">InterviewScore</result>
+	</action>
 		<!-- ############################ 人员处理 end ############################ -->
 
 		<!-- ############################ 答题start ############################ -->

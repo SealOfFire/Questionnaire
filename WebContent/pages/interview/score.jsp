@@ -32,39 +32,42 @@
 		<p>
 			<a class="btn btn-default" role="button" href="<s:url action='InterviewList'/>">返回</a>
 		</p>
-		<table class="table table-striped table-bordered table-hover table-responsive">
-			<tr>
-				<td style="text-align: center;" class="col-sm-1">序号</td>
-				<td style="text-align: center;">考察项目</td>
-				<td style="text-align: center;">标准</td>
-				<td style="text-align: center;">面试问题</td>
-				<td style="text-align: center;">追问</td>
-				<td style="text-align: center;" class="col-sm-1">评分</td>
-			</tr>
-			<s:iterator value="interviews" status="status">
+		<s:form action="InterviewSave">
+			<s:hidden name="userID" />
+			<table class="table table-striped table-bordered table-hover table-responsive">
 				<tr>
-					<td style="text-align: center;"><s:property value="#status.index+1" /></td>
-					<td style="vertical-align: middle;"><s:property value="title" /></td>
-					<td style="vertical-align: middle;"><s:property value="standard" /></td>
-					<td style="vertical-align: middle;"><s:property value="question" /></td>
-					<td style="vertical-align: middle;"><s:property value="questionAdd" /></td>
-					<td style="text-align: center;"><s:textfield class="form-control" id="questionID" /></td>
+					<td style="text-align: center;" class="col-sm-1">序号</td>
+					<td style="text-align: center;">考察项目</td>
+					<td style="text-align: center;">标准</td>
+					<td style="text-align: center;">面试问题</td>
+					<td style="text-align: center;">追问</td>
+					<td style="text-align: center;" class="col-sm-1">评分</td>
 				</tr>
-			</s:iterator>
-		</table>
-		<div class="panel panel-default panel-primary">
-			<div class="panel-heading">综合评价</div>
-			<div class="panel-body">
-				<p>请依照下列标准进行评分</p>
-				<p>1-2分:非常差;&nbsp;&nbsp;&nbsp;3-4分:差&nbsp;&nbsp;&nbsp;5分:较差&nbsp;&nbsp;&nbsp;6分:基本合格;&nbsp;&nbsp;&nbsp;7分:一般&nbsp;&nbsp;&nbsp;8-9分:良好;&nbsp;&nbsp;&nbsp;10分:优秀</p>
-				<p>
-					<textarea class="form-control" rows="3"></textarea>
-				</p>
-				<p>
-					<s:submit class="btn btn-primary" action="login" value="保存" />
-				</p>
+				<s:iterator value="interviews" status="status">
+					<tr>
+						<td style="text-align: center;"><s:property value="#status.index+1" /></td>
+						<td style="vertical-align: middle;"><s:property value="title" /></td>
+						<td style="vertical-align: middle;"><s:property value="standard" /></td>
+						<td style="vertical-align: middle;"><s:property value="question" /></td>
+						<td style="vertical-align: middle;"><s:property value="questionAdd" /></td>
+						<td style="text-align: center;"><s:textfield class="form-control" name="%{questionID}" value="%{score}" /></td>
+					</tr>
+				</s:iterator>
+			</table>
+			<div class="panel panel-default panel-primary">
+				<div class="panel-heading">综合评价</div>
+				<div class="panel-body">
+					<p>请依照下列标准进行评分</p>
+					<p>1-2分:非常差;&nbsp;&nbsp;&nbsp;3-4分:差&nbsp;&nbsp;&nbsp;5分:较差&nbsp;&nbsp;&nbsp;6分:基本合格;&nbsp;&nbsp;&nbsp;7分:一般&nbsp;&nbsp;&nbsp;8-9分:良好;&nbsp;&nbsp;&nbsp;10分:优秀</p>
+					<p>
+						<s:textarea class="form-control" id="overall" name="overall" rows="3" />
+					</p>
+					<p>
+						<s:submit class="btn btn-primary" action="login" value="保存" />
+					</p>
+				</div>
 			</div>
-		</div>
+		</s:form>
 	</div>
 </body>
 </html>

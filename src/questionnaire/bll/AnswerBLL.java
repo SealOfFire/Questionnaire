@@ -1,5 +1,7 @@
 package questionnaire.bll;
 
+import java.util.ArrayList;
+
 import questionnaire.dal.AnswerDAL;
 import questionnaire.dal.QuestionnairePartsDAL;
 import questionnaire.web.model.Answer;
@@ -28,7 +30,11 @@ public class AnswerBLL {
 
 	public int replace(Answer answer) {
 		return new AnswerDAL().replace(answer.getUserID(), answer.getQuestionnaireID(), answer.getQuestionID(),
-				answer.getQptionID(), answer.getAnswer(), answer.getBeginDate(), answer.getEndDate(),
+				answer.getOptionID(), answer.getAnswer(), answer.getBeginDate(), answer.getEndDate(),
 				answer.getScore());
+	}
+
+	public ArrayList<Answer> select(String userID, String questionnaireID) {
+		return new AnswerDAL().select(userID, questionnaireID);
 	}
 }

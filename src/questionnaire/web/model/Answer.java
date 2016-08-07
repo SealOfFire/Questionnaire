@@ -7,7 +7,7 @@ public class Answer {
 	private String userID;
 	private String questionnaireID;
 	private String questionID;
-	private String qptionID;
+	private String optionID;
 	private String answer;
 	private Date beginDate;
 	private Date endDate;
@@ -37,12 +37,12 @@ public class Answer {
 		this.questionID = questionID;
 	}
 
-	public String getQptionID() {
-		return qptionID;
+	public String getOptionID() {
+		return optionID;
 	}
 
-	public void setQptionID(String qptionID) {
-		this.qptionID = qptionID;
+	public void setOptionID(String qptionID) {
+		this.optionID = qptionID;
 	}
 
 	public String getAnswer() {

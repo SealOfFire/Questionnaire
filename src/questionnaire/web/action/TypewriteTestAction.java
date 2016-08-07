@@ -48,7 +48,7 @@ public class TypewriteTestAction extends ActionSupport {
 			answer.setUserID(this.userID);
 			answer.setQuestionnaireID(this.questionnaireID);
 			answer.setQuestionID(this.questionID);
-			answer.setQptionID(this.questionID);
+			answer.setOptionID(this.questionID);
 			answer.setAnswer(this.text);
 			answer.setBeginDate((Date) ActionContext.getContext().getSession().get("BEGIN_DATE"));
 			answer.setEndDate(new Date(new java.util.Date().getTime()));

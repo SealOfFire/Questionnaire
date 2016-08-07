@@ -48,7 +48,7 @@
 					<td style="text-align: center;"><s:property value="#status.index+1" /></td>
 					<td style="text-align: center;">1</td>
 					<td style="text-align: center;"><s:property value="name" /></td>
-					<td style="text-align: center;"><s:property value="sex" /></td>
+					<td style="text-align: center;"><s:property value="sexString" /></td>
 					<td style="text-align: center;"><s:property value="PhoneNumber" /></td>
 					<td style="text-align: center;"><s:property value="IDCardNumber" /></td>
 					<td style="text-align: center;">2</td>

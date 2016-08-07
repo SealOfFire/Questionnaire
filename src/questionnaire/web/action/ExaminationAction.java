@@ -57,7 +57,7 @@ public class ExaminationAction extends ActionSupport {
 				answer.setUserID(this.userID);
 				answer.setQuestionnaireID(questionnaireID);
 				answer.setQuestionID(question.getQuestionID());
-				answer.setQptionID(selectedOptionID);
+				answer.setOptionID(selectedOptionID);
 				answer.setAnswer(selectedOptionID);
 				answer.setBeginDate((Date) ActionContext.getContext().getSession().get("BEGIN_DATE"));
 				answer.setEndDate(new Date(new java.util.Date().getTime()));
