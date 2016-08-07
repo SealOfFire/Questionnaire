@@ -9,12 +9,22 @@
 	<constant name="struts.ui.theme" value="simple" />
 
 	<package name="Questionnaire" extends="struts-default">
-		<action name="index">
+		<action name="index2">
 			<result>/index.jsp</result>
 		</action>
 
 		<action name="test">
 			<result type="freemarker">/pages/test.ftl</result>
+		</action>
+		
+		<!-- 登陆 -->
+		<action name="index">
+			<result >/pages/login.jsp</result>
+		</action>
+		
+		<action name="login" class="questionnaire.web.action.LoginAction" method="login">
+			<result name="login" type="chain">InterviewList</result>
+			<result name="error" type="chain">index</result>
 		</action>
 
 		<!-- ############################ 问卷处理 start ############################ -->
