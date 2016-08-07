@@ -61,6 +61,13 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="col-sm-1 control-label">时限</label>
+						<div class="col-sm-1">
+							<s:textfield class="form-control" name="typewrite.timeLimit" />
+						</div>
+						<label class="control-label">分</label>
+					</div>
+					<div class="form-group">
 						<label class="col-sm-1 control-label">内容</label>
 						<div class="col-sm-11">
 							<s:textarea class="form-control" id="typewrite.captionText" name="typewrite.captionText" rows="3" />

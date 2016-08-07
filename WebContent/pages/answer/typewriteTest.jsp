@@ -11,17 +11,37 @@
 <script type="text/javascript" src="scripts/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script>
+	var count = <s:property value="typewrite.timeLimit" />;
+	var maxSecond = count * 60;
+	function countDown() {
+		if (maxSecond > 0) {
+			maxSecond--;
+		} else {
+			// 提交结果
+			document.getElementById("form").submit();
+		}
+		var m = Math.floor(maxSecond / 60);
+		var s = Math.floor(maxSecond % 60);
+		// var s=Math.floor(maxSecond/);
+		$("#lblCountDown").text(m + ":" + s);
+	}
+	setInterval(countDown, 1000);
+</script>
 <title>打字测试</title>
 </head>
 <body>
 	<div class="container">
 		<h1>打字测试</h1>
-		<s:form class="form-horizontal" action="TypewriteTestSave">
+		<s:form class="form-horizontal" action="TypewriteTestSave" id="form">
 			<s:hidden name="userID" />
 			<s:hidden name="questionnaireID" />
 			<s:hidden name="questionID" />
 			<div class="form-group">
 				<label for="exampleInputEmail1">事例</label> <img class="img-responsive" alt="Responsive image" src="<s:property value="typewrite.captionImage" />">
+			</div>
+			<div class="form-group">
+				<label>剩余时间</label> <label id="lblCountDown"></label>
 			</div>
 			<div class="form-group">
 				<label for="exampleInputPassword1">输入上图的内容</label>

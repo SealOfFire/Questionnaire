@@ -8,25 +8,27 @@ import java.util.ArrayList;
 import questionnaire.web.model.Typewrite;
 
 public class TypewriteDAL extends BaseDAL {
-	private static final String INSERT01 = "insert into TypewriteQuestion(QuestionID,Title,CaptionText,CaptionImage) values(?,?,?,?)";
-	private static final String UPDATE01 = "update TypewriteQuestion set Title=?,CaptionText=?,CaptionImage=? where QuestionID=?";
+	private static final String INSERT01 = "insert into TypewriteQuestion(QuestionID,Title,CaptionText,CaptionImage,TimeLimit) values(?,?,?,?,?)";
+	private static final String UPDATE01 = "update TypewriteQuestion set Title=?,CaptionText=?,CaptionImage=?,TimeLimit=? where QuestionID=?";
 	private static final String DELETE01 = "delete from TypewriteQuestion where QuestionID=?";
-	private static final String SELECT01 = "select QuestionID,Title,CaptionText,CaptionImage from TypewriteQuestion";
+	private static final String SELECT01 = "select * from TypewriteQuestion";
 
-	public int insert(String questionID, String title, String captionText, String captionImage) {
+	public int insert(String questionID, String title, String captionText, String captionImage, int timeLimit) {
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(questionID);
 		parameters.add(title);
 		parameters.add(captionText);
 		parameters.add(captionImage);
+		parameters.add(timeLimit);
 		return this.modify(INSERT01, parameters.toArray());
 	}
 
-	public int update(String questionID, String title, String captionText, String captionImage) {
+	public int update(String questionID, String title, String captionText, String captionImage, int timeLimit) {
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(title);
 		parameters.add(captionText);
 		parameters.add(captionImage);
+		parameters.add(timeLimit);
 		parameters.add(questionID);
 		return this.modify(UPDATE01, parameters.toArray());
 	}
@@ -56,6 +58,7 @@ public class TypewriteDAL extends BaseDAL {
 				typewrite.setTitle(rs.getString("Title"));
 				typewrite.setCaptionText(rs.getString("CaptionText"));
 				typewrite.setCaptionImage(rs.getString("CaptionImage"));
+				typewrite.setTimeLimit(rs.getInt("TimeLimit"));
 			}
 
 			rs.close();
@@ -123,6 +126,7 @@ public class TypewriteDAL extends BaseDAL {
 					typewrite.setCaptionText(rs.getString("CaptionText"));
 				}
 				typewrite.setCaptionImage(rs.getString("CaptionImage"));
+				typewrite.setTimeLimit(rs.getInt("TimeLimit"));
 				typewrites.add(typewrite);
 			}
 

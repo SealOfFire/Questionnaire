@@ -23,13 +23,13 @@ public class TypewriteBLL {
 	public Typewrite insert(Typewrite typewrite) {
 		typewrite.setQuestionID(UUID.randomUUID().toString());
 		new TypewriteDAL().insert(typewrite.getQuestionID(), typewrite.getTitle(), typewrite.getCaptionText(),
-				typewrite.getCaptionImage());
+				typewrite.getCaptionImage(), typewrite.getTimeLimit());
 		return typewrite;
 	}
 
 	public Typewrite update(Typewrite typewrite) {
 		new TypewriteDAL().update(typewrite.getQuestionID(), typewrite.getTitle(), typewrite.getCaptionText(),
-				typewrite.getCaptionImage());
+				typewrite.getCaptionImage(), typewrite.getTimeLimit());
 		return typewrite;
 	}
 }
