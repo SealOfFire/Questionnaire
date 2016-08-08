@@ -94,6 +94,7 @@
 		<action name="QuestionSave" class="questionnaire.web.action.QuestionAction"
 			method="save">
 			<result name="success" type="chain">QuestionEdit</result>
+			<result name="input">/pages/question/edit.jsp</result>
 		</action>
 
 		<action name="QuestionDelete" class="questionnaire.web.action.QuestionAction"
@@ -106,6 +107,7 @@
 		<action name="OptionCreate" class="questionnaire.web.action.OptionAction"
 			method="create">
 			<result name="success" type="chain">QuestionEdit</result>
+			<!-- <result name="input">/pages/question/edit.jsp</result> -->
 		</action>
 
 		<action name="OptionDelete" class="questionnaire.web.action.OptionAction"

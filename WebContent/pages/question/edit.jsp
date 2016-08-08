@@ -27,6 +27,11 @@
 			dialog.dialog("open");
 		});
 	});
+
+	function validate() {
+		var patt1 = new RegExp("^[0-9]+(.[0-9]{2})?$");
+		patt1.test($("#option.score").text());
+	}
 </script>
 <title>问题编辑</title>
 </head>
@@ -68,6 +73,9 @@
 							<s:select class="form-control" name="question.questionType" list="ddlQuestionType" listKey="key" listValue="value" value="question.questionType" />
 						</div>
 					</div>
+					<s:fielderror style="color:red;">
+						<s:param>errmsg1</s:param>
+					</s:fielderror>
 					<div class="form-group">
 						<div class="col-sm-offset-1 col-sm-10">
 							<s:submit class="btn btn-primary" value="保存" />
@@ -79,7 +87,7 @@
 		<!-- --------------------- 问题部分 end --------------------- -->
 
 		<!-- --------------------- 选项 start --------------------- -->
-		<s:if test="question">
+		<s:if test="!question.notSaved()">
 			<div class="panel panel-default panel-primary">
 				<div class="panel-heading">选项编辑</div>
 				<div class="panel-body">
@@ -122,8 +130,11 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">分值</label>
 				<div class="col-sm-10">
-					<s:textfield class="form-control" name="option.score" />
+					<s:textfield class="form-control" name="option.scoreString" id="option.scoreString" />
 				</div>
+			</div>
+			<div class="form-group has-error">
+				<label class="control-label col-sm-offset-2" id="errmsg2"></label>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
