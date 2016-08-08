@@ -73,6 +73,9 @@
 							<s:textarea class="form-control" id="typewrite.captionText" name="typewrite.captionText" rows="3" />
 						</div>
 					</div>
+					<s:fielderror style="color:red;">
+						<s:param>errmsg</s:param>
+					</s:fielderror>
 					<div class="form-group">
 						<div class="col-sm-offset-1 col-sm-10">
 							<input type="button" class="btn btn-primary" onclick="javascript:screenshot();" value="保存">

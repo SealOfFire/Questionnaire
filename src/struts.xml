@@ -193,6 +193,7 @@
 		<action name="TypewriteSave" class="questionnaire.web.action.TypewriteAction"
 			method="save">
 			<result name="success" type="chain">TypewriteEdit</result>
+			<result name="input">/pages/typewrite/edit.jsp</result>
 		</action>
 
 		<action name="TypewriteDelete" class="questionnaire.web.action.TypewriteAction"

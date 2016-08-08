@@ -36,6 +36,11 @@ public class TypewriteAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public void validateSave() {
+		if (this.typewrite.getTimeLimit() == 0)
+			addFieldError("errmsg", "时限的格式不正确");
+	}
+
 	public String edit() throws Exception {
 		this.typewrite = new TypewriteBLL().select(this.questionID);
 		return SUCCESS;
