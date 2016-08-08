@@ -15,6 +15,13 @@ public class LoginAction extends ActionSupport {
 			return ERROR;
 	}
 
+	/**  */
+	@Override
+	public void validate() {
+		if (!this.userName.equals(this.password) || !this.userName.equals("admin"))
+			addFieldError("userName", "用户名或密码错误");
+	}
+
 	public String getUserName() {
 		return userName;
 	}

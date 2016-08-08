@@ -62,6 +62,9 @@
 						</div>
 						<label class="control-label">分钟</label>
 					</div>
+					<s:fielderror style="color:red;">
+						<s:param>errmsg</s:param>
+					</s:fielderror>
 					<div class="form-group">
 						<div class="col-sm-offset-1 col-sm-10">
 							<s:submit class="btn btn-primary" value="保存" />
@@ -99,7 +102,7 @@
 		<!-- --------------------- 问题部分 end --------------------- -->
 
 		<!-- --------------------- 被选题 start --------------------- -->
-		<s:if test="questionnaire">
+		<s:if test="!questionnaire.notSaved()">
 			<div class="panel panel-default panel-primary">
 				<div class="panel-heading">备选问题</div>
 				<div class="panel-body"></div>

@@ -26,6 +26,7 @@
 			method="login">
 			<result name="login" type="chain">InterviewList</result>
 			<result name="error" type="chain">index</result>
+			<result name="input">/pages/login.jsp</result>
 		</action>
 
 		<!-- ############################ 问卷处理 start ############################ -->
@@ -50,6 +51,7 @@
 		<action name="QuestionnaireSave" class="questionnaire.web.action.QuestionnaireAction"
 			method="save">
 			<result name="success" type="chain">QuestionnaireEdit</result>
+			<result name="input">/pages/questionnaire/edit.jsp</result>
 		</action>
 
 		<!-- 删除问卷 -->
@@ -113,20 +115,21 @@
 		<!-- ############################ 选项处理 end ############################ -->
 
 		<!-- ############################ 人员处理 start ############################ -->
-	<action name="InterviewList" class="questionnaire.web.action.InterviewAction"
-		method="list">
-		<result name="success">/pages/interview/list.jsp</result>
-	</action>
+		<action name="InterviewList" class="questionnaire.web.action.InterviewAction"
+			method="list">
+			<result name="success">/pages/interview/list.jsp</result>
+		</action>
 
-	<action name="InterviewScore" class="questionnaire.web.action.InterviewAction"
-		method="score">
-		<result name="success">/pages/interview/score.jsp</result>
-	</action>
+		<action name="InterviewScore" class="questionnaire.web.action.InterviewAction"
+			method="score">
+			<result name="success">/pages/interview/score.jsp</result>
+		</action>
 
-	<action name="InterviewSave" class="questionnaire.web.action.InterviewAction"
-		method="save">
-		<result name="success" type="chain">InterviewScore</result>
-	</action>
+		<action name="InterviewSave" class="questionnaire.web.action.InterviewAction"
+			method="save">
+			<result name="success" type="chain">InterviewScore</result>
+			<result name="input">/pages/interview/score.jsp</result>
+		</action>
 		<!-- ############################ 人员处理 end ############################ -->
 
 		<!-- ############################ 答题start ############################ -->

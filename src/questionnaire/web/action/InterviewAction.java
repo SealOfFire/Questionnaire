@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import questionnaire.bll.AnswerBLL;
@@ -60,6 +61,8 @@ public class InterviewAction extends ActionSupport {
 		answer.setEndDate(new Date(new java.util.Date().getTime()));
 		answer.setScore(new BigDecimal(0));
 		count += bll.replace(answer);
+
+		ActionContext.getContext().getSession().put("error", "");
 		return SUCCESS;
 	}
 
@@ -77,8 +80,32 @@ public class InterviewAction extends ActionSupport {
 				}
 			}
 		}
-
 		return SUCCESS;
+	}
+
+	/**  */
+	public void validateSave() {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		this.interviews = new InterviewBLL().selectList();
+		ArrayList<Answer> answers = new AnswerBLL().select(this.userID, "00000000-0000-0000-0000-000000000000");
+		for (Interview interview : this.interviews) {
+			String strScore = request.getParameter(interview.getQuestionID());
+			try {
+				BigDecimal score = new BigDecimal(strScore);
+			} catch (Exception e) {
+				addFieldError("errmsg", "分数不是数值类型");
+			}
+			for (Answer answer : answers) {
+				if (interview.getQuestionID().equals(answer.getQuestionID())) {
+					interview.setScore(answer.getScore());
+				}
+				if (answer.getQuestionID().equals("00000000-0000-0000-0000-000000000000")) {
+					this.overall = answer.getAnswer();
+				}
+			}
+		}
+		if (this.overall.length() >= 500)
+			addFieldError("errmsg", "综合评价不能超过500字");
 	}
 
 	public ArrayList<UserInfo> getUserInfos() {

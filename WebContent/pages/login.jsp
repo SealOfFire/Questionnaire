@@ -31,6 +31,9 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<s:fielderror style="color:red;">
+							<s:param>userName</s:param>
+						</s:fielderror>
 						<div class="col-sm-offset-1 col-sm-10">
 							<s:submit class="btn btn-primary" value="保存" />
 						</div>

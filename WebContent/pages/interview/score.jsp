@@ -63,6 +63,11 @@
 						<s:textarea class="form-control" id="overall" name="overall" rows="3" />
 					</p>
 					<p>
+						<s:fielderror style="color:red;">
+							<s:param>errmsg</s:param>
+						</s:fielderror>
+					</p>
+					<p>
 						<s:submit class="btn btn-primary" action="login" value="保存" />
 					</p>
 				</div>
