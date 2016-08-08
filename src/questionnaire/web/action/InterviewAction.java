@@ -62,7 +62,6 @@ public class InterviewAction extends ActionSupport {
 		answer.setScore(new BigDecimal(0));
 		count += bll.replace(answer);
 
-		ActionContext.getContext().getSession().put("error", "");
 		return SUCCESS;
 	}
 
@@ -100,7 +99,7 @@ public class InterviewAction extends ActionSupport {
 					interview.setScore(answer.getScore());
 				}
 				if (answer.getQuestionID().equals("00000000-0000-0000-0000-000000000000")) {
-					this.overall = answer.getAnswer();
+					// this.overall = answer.getAnswer();
 				}
 			}
 		}
