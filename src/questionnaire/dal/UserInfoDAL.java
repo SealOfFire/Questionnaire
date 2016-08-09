@@ -1,5 +1,6 @@
 package questionnaire.dal;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,12 +11,16 @@ import questionnaire.web.model.UserInfo;
 public class UserInfoDAL extends BaseDAL {
 	private static final String SELECT01 = "select * from userinfo";
 	private static final String SELECT02 = "select * from userinfo where name=? and IDCardNumber=?";
+	private static final String SELECT03 = "select questionnaireparts.sort,Answer.QuestionnaireID,sum(score) from Answer left join questionnaireparts on Answer.QuestionnaireID=questionnaireparts.QuestionnaireID where userID=? group by Answer.QuestionnaireID order by sort";
 	private static final String INSERT01 = "insert into  userinfo(userID,name,phoneNumber,IDCardNumber,sex,area) values(?,?,?,?,?,?)";
+	private static final String DELETE01 = "delete from userinfo where userid=?";
 
 	public ArrayList<UserInfo> selectList() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		ArrayList<UserInfo> userInfos = new ArrayList<UserInfo>();
 		try {
 
@@ -33,13 +38,35 @@ public class UserInfoDAL extends BaseDAL {
 				userInfo.setIDCardNumber(rs.getString("IDCardNumber"));
 				userInfo.setSex(rs.getString("Sex"));
 				userInfo.setArea(rs.getString("Area"));
+				// 分数
+				pstmt2 = conn.prepareStatement(SELECT03);
+				pstmt2.setString(1, userInfo.getUserID());
+				rs2 = pstmt2.executeQuery();
+				while (rs2.next()) {
+					BigDecimal score = rs2.getBigDecimal(3);
+					if (rs2.getString(1) == null) {
+						userInfo.setScore4(score);
+					} else if (rs2.getString(1).equals("0")) {
+						userInfo.setScore1(score);
+					} else if (rs2.getString(1).equals("1")) {
+						userInfo.setScore2(score);
+					} else if (rs2.getString(1).equals("2")) {
+						userInfo.setScore3(score);
+					} else {
+
+					}
+				}
 				userInfos.add(userInfo);
 			}
 
 			rs.close();
 			rs = null;
+			rs2.close();
+			rs2 = null;
 			pstmt.close();
 			pstmt = null;
+			pstmt2.close();
+			pstmt2 = null;
 			conn.close();
 			conn = null;
 		} catch (Exception e) {
@@ -62,6 +89,15 @@ public class UserInfoDAL extends BaseDAL {
 					e.printStackTrace();
 				}
 				pstmt = null;
+			}
+
+			if (pstmt2 != null) {
+				try {
+					pstmt2.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				pstmt2 = null;
 			}
 
 			if (conn != null) {
@@ -149,5 +185,11 @@ public class UserInfoDAL extends BaseDAL {
 			}
 		}
 		return userInfo;
+	}
+
+	public int delete(String userID) {
+		ArrayList<Object> parameters = new ArrayList<Object>();
+		parameters.add(userID);
+		return this.modify(DELETE01, parameters.toArray());
 	}
 }

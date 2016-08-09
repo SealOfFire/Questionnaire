@@ -127,6 +127,11 @@
 			<result name="success">/pages/interview/score.jsp</result>
 		</action>
 
+		<action name="InterviewDelete" class="questionnaire.web.action.InterviewAction"
+			method="delete">
+			<result name="success" type="chain">InterviewList</result>
+		</action>
+
 		<action name="InterviewSave" class="questionnaire.web.action.InterviewAction"
 			method="save">
 			<result name="success" type="chain">InterviewScore</result>

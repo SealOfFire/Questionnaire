@@ -8,6 +8,7 @@ import questionnaire.web.model.UserInfo;
 
 public class UserInfoBLL {
 	public ArrayList<UserInfo> selectList() {
+		// ArrayList<UserInfo> userInfo = new UserInfoDAL().selectList();
 		return new UserInfoDAL().selectList();
 	}
 
@@ -20,5 +21,9 @@ public class UserInfoBLL {
 
 	public UserInfo select(String name, String IDCardNumber) {
 		return new UserInfoDAL().select(name, IDCardNumber);
+	}
+
+	public int delete(String userID) {
+		return new UserInfoDAL().delete(userID);
 	}
 }

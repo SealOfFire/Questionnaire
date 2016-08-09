@@ -13,6 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import questionnaire.bll.AnswerBLL;
 import questionnaire.bll.InterviewBLL;
+import questionnaire.bll.OptionBLL;
 import questionnaire.bll.UserInfoBLL;
 import questionnaire.web.model.Answer;
 import questionnaire.web.model.Interview;
@@ -105,6 +106,11 @@ public class InterviewAction extends ActionSupport {
 		}
 		if (this.overall.length() >= 500)
 			addFieldError("errmsg", "综合评价不能超过500字");
+	}
+
+	public String delete() {
+		new UserInfoBLL().delete(this.userID);
+		return SUCCESS;
 	}
 
 	public ArrayList<UserInfo> getUserInfos() {

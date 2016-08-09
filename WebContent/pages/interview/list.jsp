@@ -39,7 +39,8 @@
 				<th style="text-align: center;">身份证号</th>
 				<th style="text-align: center;">心理测试得分</th>
 				<th style="text-align: center;">打字速度得分</th>
-				<th style="text-align: center;">岗前通班得分</th>
+				<th style="text-align: center;">面试得分</th>
+				<th style="text-align: center;">岗前通关得分</th>
 				<th style="text-align: center;">总分</th>
 				<th style="text-align: center;">操作</th>
 			</tr>
@@ -51,11 +52,15 @@
 					<td style="text-align: center;"><s:property value="sexString" /></td>
 					<td style="text-align: center;"><s:property value="PhoneNumber" /></td>
 					<td style="text-align: center;"><s:property value="IDCardNumber" /></td>
-					<td style="text-align: center;">2</td>
-					<td style="text-align: center;">3</td>
-					<td style="text-align: center;">4</td>
-					<td style="text-align: center;">5</td>
-					<td style="text-align: center;"><a href="<s:url action="InterviewScore"><s:param name="userID" value="userID"></s:param></s:url>">打分</a></td>
+					<td style="text-align: center;"><s:property value="scoreSum" /></td>
+					<td style="text-align: center;"><s:property value="score3" /></td>
+					<td style="text-align: center;"><s:property value="score4" /></td>
+					<td style="text-align: center;"><s:property value="score5" /></td>
+					<td style="text-align: center;"><s:property value="sumALLScore" /></td>
+					<td style="text-align: center;">
+					<a href="<s:url action="InterviewScore"><s:param name="userID" value="userID"></s:param></s:url>">打分</a>
+					<a onclick="javascript:return p_del();"  href="<s:url action="InterviewDelete"><s:param name="userID" value="userID"></s:param></s:url>">删除</a>
+					</td>
 				</tr>
 			</s:iterator>
 		</table>

@@ -1,5 +1,7 @@
 package questionnaire.web.model;
 
+import java.math.BigDecimal;
+
 public class UserInfo {
 	private String userID;
 	private String name;
@@ -8,12 +10,25 @@ public class UserInfo {
 	private String sex;
 	private String sexString;
 	private String area;
+	private BigDecimal score1;
+	private BigDecimal score2;
+	private BigDecimal score3;
+	private BigDecimal score4;
+	private BigDecimal score5;
 
 	public boolean notSaved() {
 		if (this.userID == null || this.userID.length() == 0)
 			return true;
 		else
 			return false;
+	}
+
+	public UserInfo() {
+		this.score1 = new BigDecimal(0);
+		this.score2 = new BigDecimal(0);
+		this.score3 = new BigDecimal(0);
+		this.score4 = new BigDecimal(0);
+		this.score5 = new BigDecimal(0);
 	}
 
 	public String getUserID() {
@@ -81,5 +96,53 @@ public class UserInfo {
 
 	public void setArea(String area) {
 		this.area = area;
+	}
+
+	public BigDecimal getScore1() {
+		return score1;
+	}
+
+	public void setScore1(BigDecimal score1) {
+		this.score1 = score1;
+	}
+
+	public BigDecimal getScoreSum() {
+		return this.score1.add(this.score2);
+	}
+
+	public BigDecimal getScore2() {
+		return score2;
+	}
+
+	public void setScore2(BigDecimal score2) {
+		this.score2 = score2;
+	}
+
+	public BigDecimal getScore3() {
+		return score3;
+	}
+
+	public void setScore3(BigDecimal score3) {
+		this.score3 = score3;
+	}
+
+	public BigDecimal getScore4() {
+		return score4;
+	}
+
+	public void setScore4(BigDecimal score4) {
+		this.score4 = score4;
+	}
+
+	public BigDecimal getScore5() {
+		return score5;
+	}
+
+	public void setScore5(BigDecimal score5) {
+		this.score5 = score5;
+	}
+
+	public BigDecimal getSumALLScore() {
+		return this.score1.add(this.score2).add(this.score3).add(this.score4).add(this.score5);
 	}
 }
