@@ -57,6 +57,10 @@
 			<div class="panel panel-default panel-primary">
 				<div class="panel-heading">综合评价</div>
 				<div class="panel-body">
+					<p>岗前通关得分</p>
+					<p>
+						<s:textfield class="form-control" id="score5" name="score5"/>
+					</p>
 					<p>请依照下列标准进行评分</p>
 					<p>1-2分:非常差;&nbsp;&nbsp;&nbsp;3-4分:差&nbsp;&nbsp;&nbsp;5分:较差&nbsp;&nbsp;&nbsp;6分:基本合格;&nbsp;&nbsp;&nbsp;7分:一般&nbsp;&nbsp;&nbsp;8-9分:良好;&nbsp;&nbsp;&nbsp;10分:优秀</p>
 					<p>

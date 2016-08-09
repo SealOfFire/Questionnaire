@@ -8,12 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import questionnaire.bll.AnswerBLL;
 import questionnaire.bll.InterviewBLL;
-import questionnaire.bll.OptionBLL;
 import questionnaire.bll.UserInfoBLL;
 import questionnaire.web.model.Answer;
 import questionnaire.web.model.Interview;
@@ -26,6 +24,7 @@ public class InterviewAction extends ActionSupport {
 	private ArrayList<UserInfo> userInfos = null;
 	private ArrayList<Interview> interviews = null;
 	private String overall = null;
+	private String score5 = null;
 
 	public String list() throws Exception {
 		this.userInfos = new UserInfoBLL().selectList();
@@ -51,25 +50,31 @@ public class InterviewAction extends ActionSupport {
 			answer.setScore(score);
 			count += bll.replace(answer);
 		}
+
+		// 岗前通关得分
 		// 总评
+		BigDecimal val = new BigDecimal(0);
+		try {
+			val = new BigDecimal(this.score5);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		Answer answer = new Answer();
 		answer.setUserID(this.userID);
-		answer.setQuestionnaireID("00000000-0000-0000-0000-000000000000");
+		answer.setQuestionnaireID("00000000-0000-0000-0000-000000000001");
 		answer.setQuestionID("00000000-0000-0000-0000-000000000000");
 		answer.setOptionID("00000000-0000-0000-0000-000000000000");
 		answer.setAnswer(this.overall);
 		answer.setBeginDate(new Date(new java.util.Date().getTime()));
 		answer.setEndDate(new Date(new java.util.Date().getTime()));
-		answer.setScore(new BigDecimal(0));
+		answer.setScore(val);
 		count += bll.replace(answer);
-
 		return SUCCESS;
 	}
 
 	public String score() {
 		this.interviews = new InterviewBLL().selectList();
 		ArrayList<Answer> answers = new AnswerBLL().select(this.userID, "00000000-0000-0000-0000-000000000000");
-
 		for (Interview interview : this.interviews) {
 			for (Answer answer : answers) {
 				if (interview.getQuestionID().equals(answer.getQuestionID())) {
@@ -80,6 +85,13 @@ public class InterviewAction extends ActionSupport {
 				}
 			}
 		}
+
+		ArrayList<Answer> answers2 = new AnswerBLL().select(this.userID, "00000000-0000-0000-0000-000000000001");
+		for (Answer answer : answers2) {
+			this.overall = answer.getAnswer();
+			this.score5 = answer.getScore().toString();
+		}
+
 		return SUCCESS;
 	}
 
@@ -99,11 +111,15 @@ public class InterviewAction extends ActionSupport {
 				if (interview.getQuestionID().equals(answer.getQuestionID())) {
 					interview.setScore(answer.getScore());
 				}
-				if (answer.getQuestionID().equals("00000000-0000-0000-0000-000000000000")) {
-					// this.overall = answer.getAnswer();
-				}
 			}
 		}
+
+		try {
+			BigDecimal score = new BigDecimal(this.score5);
+		} catch (Exception e) {
+			addFieldError("errmsg", "通关分数不是数值类型");
+		}
+
 		if (this.overall.length() >= 500)
 			addFieldError("errmsg", "综合评价不能超过500字");
 	}
@@ -143,5 +159,13 @@ public class InterviewAction extends ActionSupport {
 
 	public void setOverall(String overall) {
 		this.overall = overall;
+	}
+
+	public String getScore5() {
+		return score5;
+	}
+
+	public void setScore5(String score5) {
+		this.score5 = score5;
 	}
 }

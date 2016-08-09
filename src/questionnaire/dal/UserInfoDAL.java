@@ -45,7 +45,10 @@ public class UserInfoDAL extends BaseDAL {
 				while (rs2.next()) {
 					BigDecimal score = rs2.getBigDecimal(3);
 					if (rs2.getString(1) == null) {
-						userInfo.setScore4(score);
+						if (rs2.getString(2).equals("00000000-0000-0000-0000-000000000001"))
+							userInfo.setScore5(score);
+						else if (rs2.getString(2).equals("00000000-0000-0000-0000-000000000000"))
+							userInfo.setScore4(score);
 					} else if (rs2.getString(1).equals("0")) {
 						userInfo.setScore1(score);
 					} else if (rs2.getString(1).equals("1")) {
