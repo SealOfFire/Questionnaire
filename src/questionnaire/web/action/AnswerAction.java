@@ -15,6 +15,7 @@ public class AnswerAction extends ActionSupport {
 	private UserInfo userInfo = null;
 	private String userID = null;
 	private ArrayList<ListItem> ddlSex = null;
+	private ArrayList<ListItem> ddlArea = null;
 
 	public String initAnswer() {
 		this.initDropDownList();
@@ -58,6 +59,14 @@ public class AnswerAction extends ActionSupport {
 		this.ddlSex = new ArrayList<ListItem>();
 		this.ddlSex.add(new ListItem("male", "男"));
 		this.ddlSex.add(new ListItem("female", "女"));
+
+		this.ddlArea = new ArrayList<ListItem>();
+		this.ddlArea.add(new ListItem("北区中心", "北区中心"));
+		this.ddlArea.add(new ListItem("西区中心", "西区中心"));
+		this.ddlArea.add(new ListItem("中原中心", "中原中心"));
+		this.ddlArea.add(new ListItem("南区中心", "南区中心"));
+		this.ddlArea.add(new ListItem("互联网客服中心", "互联网客服中心"));
+		this.ddlArea.add(new ListItem("客户回访中心", "客户回访中心"));
 	}
 
 	public UserInfo getUserInfo() {
@@ -82,5 +91,13 @@ public class AnswerAction extends ActionSupport {
 
 	public void setUserID(String userID) {
 		this.userID = userID;
+	}
+
+	public ArrayList<ListItem> getDdlArea() {
+		return ddlArea;
+	}
+
+	public void setDdlArea(ArrayList<ListItem> ddlArea) {
+		this.ddlArea = ddlArea;
 	}
 }

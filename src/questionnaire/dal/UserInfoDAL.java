@@ -10,7 +10,7 @@ import questionnaire.web.model.UserInfo;
 public class UserInfoDAL extends BaseDAL {
 	private static final String SELECT01 = "select * from userinfo";
 	private static final String SELECT02 = "select * from userinfo where name=? and IDCardNumber=?";
-	private static final String INSERT01 = "insert into  userinfo(userID,name,phoneNumber,IDCardNumber,sex) values(?,?,?,?,?)";
+	private static final String INSERT01 = "insert into  userinfo(userID,name,phoneNumber,IDCardNumber,sex,area) values(?,?,?,?,?,?)";
 
 	public ArrayList<UserInfo> selectList() {
 		Connection conn = null;
@@ -32,6 +32,7 @@ public class UserInfoDAL extends BaseDAL {
 				userInfo.setPhoneNumber(rs.getString("PhoneNumber"));
 				userInfo.setIDCardNumber(rs.getString("IDCardNumber"));
 				userInfo.setSex(rs.getString("Sex"));
+				userInfo.setArea(rs.getString("Area"));
 				userInfos.add(userInfo);
 			}
 
@@ -75,13 +76,14 @@ public class UserInfoDAL extends BaseDAL {
 		return userInfos;
 	}
 
-	public int insert(String userID, String name, String phoneNumber, String IDCardNumber, String sex) {
+	public int insert(String userID, String name, String phoneNumber, String IDCardNumber, String sex, String area) {
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(userID);
 		parameters.add(name);
 		parameters.add(phoneNumber);
 		parameters.add(IDCardNumber);
 		parameters.add(sex);
+		parameters.add(area);
 		return this.modify(INSERT01, parameters.toArray());
 	}
 
@@ -106,6 +108,7 @@ public class UserInfoDAL extends BaseDAL {
 				userInfo.setPhoneNumber(rs.getString("PhoneNumber"));
 				userInfo.setIDCardNumber(rs.getString("IDCardNumber"));
 				userInfo.setSex(rs.getString("Sex"));
+				userInfo.setArea(rs.getString("Area"));
 			}
 
 			rs.close();

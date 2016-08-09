@@ -7,6 +7,7 @@ public class UserInfo {
 	private String IDCardNumber;
 	private String sex;
 	private String sexString;
+	private String area;
 
 	public boolean notSaved() {
 		if (this.userID == null || this.userID.length() == 0)
@@ -72,5 +73,13 @@ public class UserInfo {
 
 	public void setSexString(String sexString) {
 		this.sexString = sexString;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
 	}
 }

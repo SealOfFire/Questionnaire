@@ -46,7 +46,7 @@
 			<s:iterator value="userInfos" status="status">
 				<tr>
 					<td style="text-align: center;"><s:property value="#status.index+1" /></td>
-					<td style="text-align: center;">1</td>
+					<td style="text-align: center;"><s:property value="area" /></td>
 					<td style="text-align: center;"><s:property value="name" /></td>
 					<td style="text-align: center;"><s:property value="sexString" /></td>
 					<td style="text-align: center;"><s:property value="PhoneNumber" /></td>

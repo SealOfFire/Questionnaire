@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,7 +28,7 @@
 					<div class="form-group">
 						<label class="col-sm-1 control-label">密码</label>
 						<div class="col-sm-11">
-							<s:textfield class="form-control" name="password" />
+							<s:password class="form-control" name="password" />
 						</div>
 					</div>
 					<div class="form-group">
