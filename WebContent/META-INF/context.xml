@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource name="jdbc/mysql" auth="Container" type="javax.sql.DataSource"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://localhost/questionnairedb?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=GMT"
+		username="root" password="root" />
+</Context> 

@@ -46,6 +46,14 @@ public class QuestionAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public void validateSave() {
+		this.initDropDownList();
+		this.questionID = this.question.getQuestionID();
+		this.options = new OptionBLL().selectList(this.questionID);
+		if (this.question.getCaption().length() > 500)
+			addFieldError("errmsg1", "内容不能超过500个字符");
+	}
+
 	/** 编辑问题 */
 	public String edit() throws Exception {
 		// 初始化下拉框数据

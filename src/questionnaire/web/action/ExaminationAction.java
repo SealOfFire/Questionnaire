@@ -1,5 +1,7 @@
 package questionnaire.web.action;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -7,32 +9,66 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import questionnaire.bll.AnswerBLL;
 import questionnaire.bll.QuestionnaireBLL;
+import questionnaire.bll.QuestionnairePartsBLL;
+import questionnaire.web.model.Answer;
+import questionnaire.web.model.Option;
 import questionnaire.web.model.Question;
 import questionnaire.web.model.Questionnaire;
 
 public class ExaminationAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
-	// localhost:8080/Questionnaire/ExaminationInit?questionnaireID=618f7ee9-8447-4244-9838-10770fc317ab
+	private String userID = null;
 	private String questionnaireID = null;
 	private Questionnaire questionnaire = null;
 
 	public String init() {
-		this.questionnaire = new QuestionnaireBLL().selectIncludeQuestions(this.questionnaireID);
+		// 开始时间
+		ActionContext.getContext().getSession().put("BEGIN_DATE", new Date(new java.util.Date().getTime()));
+		// 获取答题进度
+		boolean[] answerProgress = new AnswerBLL().answerProgress(this.userID);
+		if (!answerProgress[0]) {
+			// 从第一部分开始
+			this.questionnaire = new QuestionnairePartsBLL().selectPart1();
+			this.questionnaireID = this.questionnaire.getQuestionnaireID();
+		} else if (!answerProgress[1]) {
+			// 从第二部分开始
+			this.questionnaire = new QuestionnairePartsBLL().selectPart2();
+			this.questionnaireID = this.questionnaire.getQuestionnaireID();
+		} else if (!answerProgress[2]) {
+			// 打字部分
+			return "typewrite";
+		}
 
 		return SUCCESS;
 	}
 
 	public String save() {
-		this.questionnaire = new QuestionnaireBLL().selectIncludeQuestions(this.questionnaireID);
-		// HttpServletRequest request = (HttpServletRequest)
-		// ActionContext.getContext().get("request");
-		HttpServletRequest request = ServletActionContext.getRequest();
-		for (Question question : this.questionnaire.getQuestions()) {
-			System.out.println(request.getParameter("questionID" + question.getQuestionID()));
+		AnswerBLL bll = new AnswerBLL();
+		if (!bll.answerProgress(this.userID, this.questionnaireID)) {
+			this.questionnaire = new QuestionnaireBLL().selectIncludeQuestions(this.questionnaireID);
+			HttpServletRequest request = ServletActionContext.getRequest();
+			int count = 0;
+			for (Question question : this.questionnaire.getQuestions()) {
+				String selectedOptionID = request.getParameter("questionID" + question.getQuestionID());
+				Answer answer = new Answer();
+				answer.setUserID(this.userID);
+				answer.setQuestionnaireID(questionnaireID);
+				answer.setQuestionID(question.getQuestionID());
+				answer.setOptionID(selectedOptionID);
+				answer.setAnswer(selectedOptionID);
+				answer.setBeginDate((Date) ActionContext.getContext().getSession().get("BEGIN_DATE"));
+				answer.setEndDate(new Date(new java.util.Date().getTime()));
+				for (Option option : question.getOptions()) {
+					if (selectedOptionID.equals(option.getOptionID())) {
+						answer.setScore(option.getScore());
+					}
+				}
+				count += bll.replace(answer);
+			}
 		}
-
 		return SUCCESS;
 	}
 
@@ -51,5 +87,13 @@ public class ExaminationAction extends ActionSupport {
 
 	public void setQuestionnaire(Questionnaire questionnaire) {
 		this.questionnaire = questionnaire;
+	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 }

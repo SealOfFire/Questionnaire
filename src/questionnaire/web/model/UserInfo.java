@@ -6,6 +6,7 @@ public class UserInfo {
 	private String phoneNumber;
 	private String IDCardNumber;
 	private String sex;
+	private String sexString;
 
 	public boolean notSaved() {
 		if (this.userID == null || this.userID.length() == 0)
@@ -52,5 +53,24 @@ public class UserInfo {
 
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+
+	public String getSexString() {
+		switch (this.sex) {
+		case "male":
+			this.sexString = "男";
+			break;
+		case "female":
+			this.sexString = "女";
+			break;
+		default:
+			this.sexString = "";
+			break;
+		}
+		return this.sexString;
+	}
+
+	public void setSexString(String sexString) {
+		this.sexString = sexString;
 	}
 }

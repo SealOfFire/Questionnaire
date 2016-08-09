@@ -53,6 +53,17 @@ public class QuestionnaireAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public void validateSave() {
+		this.initDropDownList();
+		this.allQuestions = new QuestionBLL().selectNotAddList(this.questionnaireID);
+		this.questionnaireID = this.questionnaire.getQuestionnaireID();
+		if (this.questionnaire.getTitle().length() > 50)
+			addFieldError("errmsg", "题目不能超过50个字符");
+
+		if (this.questionnaire.getTimeLimit() <= 0)
+			addFieldError("errmsg", "时限的格式不正确");
+	}
+
 	/** 编辑问题 */
 	public String edit() throws Exception {
 		// 初始化下拉框数据

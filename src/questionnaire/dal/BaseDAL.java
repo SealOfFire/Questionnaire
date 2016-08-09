@@ -6,13 +6,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 public class BaseDAL {
-	private final static String connectionString = "jdbc:mysql://localhost/questionnairedb?user=root&password=root&characterEncoding=utf8&useSSL=false&serverTimezone=GMT";
-	private final static String className = "com.mysql.cj.jdbc.Driver";
+	private static String connectionString = "jdbc:mysql://localhost/questionnairedb?user=root&password=root&characterEncoding=utf8&useSSL=false&serverTimezone=GMT";
+	private static String className = "com.mysql.cj.jdbc.Driver";
+	private DataSource ds;
 
 	/**  */
 	public BaseDAL() {
 		try {
+			InitialContext initCtx = new InitialContext();
+			this.ds = (DataSource) initCtx.lookup("java:comp/env/jdbc/mysql");
+			// Connection conn = ds.getConnection();
+
 			Class.forName(className).newInstance();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -25,7 +33,9 @@ public class BaseDAL {
 	 * @throws SQLException
 	 */
 	public Connection getConnect() throws SQLException {
-		Connection connection = DriverManager.getConnection(connectionString);
+		// Connection connection =
+		// DriverManager.getConnection(connectionString);
+		Connection connection = this.ds.getConnection();
 		return connection;
 	}
 

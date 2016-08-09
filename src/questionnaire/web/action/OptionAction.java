@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import com.opensymphony.xwork2.ActionSupport;
 
 import questionnaire.bll.OptionBLL;
+import questionnaire.web.enumeration.QuestionnaireType;
+import questionnaire.web.model.ListItem;
 import questionnaire.web.model.Option;
+import questionnaire.web.model.Question;
 
 /** 选项 */
 public class OptionAction extends ActionSupport {
@@ -15,7 +18,9 @@ public class OptionAction extends ActionSupport {
 	private String questionID = null;
 	private String optionID = null;
 	private Option option = null;
+	private Question question = null;
 	private ArrayList<Option> options = null;
+	private ArrayList<ListItem> ddlQuestionType = null;
 
 	public String create() throws Exception {
 
@@ -26,9 +31,22 @@ public class OptionAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/*
+	 * public void validateCreate() { this.initDropDownList(); this.options =
+	 * new OptionBLL().selectList(this.questionID); addFieldError("errmsg2",
+	 * "时限的格式不正确"); }
+	 */
+
 	public String delete() {
 		new OptionBLL().delete(this.optionID);
 		return SUCCESS;
+	}
+
+	/** 初始化下拉框的值 */
+	private void initDropDownList() {
+		this.ddlQuestionType = new ArrayList<ListItem>();
+		this.ddlQuestionType.add(new ListItem(QuestionnaireType.TemperamentTest, "性格测试"));
+		this.ddlQuestionType.add(new ListItem(QuestionnaireType.SeatQuality, "坐席素质"));
 	}
 
 	public String getQuestionID() {
@@ -62,4 +80,13 @@ public class OptionAction extends ActionSupport {
 	public void setOptionID(String optionID) {
 		this.optionID = optionID;
 	}
+
+	public ArrayList<ListItem> getDdlQuestionType() {
+		return ddlQuestionType;
+	}
+
+	public void setDdlQuestionType(ArrayList<ListItem> ddlQuestionType) {
+		this.ddlQuestionType = ddlQuestionType;
+	}
+
 }

@@ -7,6 +7,9 @@ public class Typewrite {
 	private String captionText;
 	private String captionImage;
 
+	/** 答卷时限 */
+	private int timeLimit;
+
 	public boolean notSaved() {
 		if (this.questionID == null || this.questionID.length() == 0)
 			return true;
@@ -44,6 +47,14 @@ public class Typewrite {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public int getTimeLimit() {
+		return timeLimit;
+	}
+
+	public void setTimeLimit(int timeLimit) {
+		this.timeLimit = timeLimit;
 	}
 
 }

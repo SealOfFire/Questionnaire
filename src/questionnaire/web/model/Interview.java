@@ -1,5 +1,7 @@
 package questionnaire.web.model;
 
+import java.math.BigDecimal;
+
 public class Interview {
 	private String questionID;
 	private String title;
@@ -7,6 +9,7 @@ public class Interview {
 	private String question;
 	private String questionAdd;
 	private int sort;
+	private BigDecimal score;
 
 	public String getQuestionID() {
 		return questionID;
@@ -54,5 +57,13 @@ public class Interview {
 
 	public void setSort(int sort) {
 		this.sort = sort;
+	}
+
+	public BigDecimal getScore() {
+		return score;
+	}
+
+	public void setScore(BigDecimal score) {
+		this.score = score;
 	}
 }

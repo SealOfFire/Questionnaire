@@ -8,6 +8,7 @@ public class Option {
 	private String questionID;
 	private String caption;
 	private BigDecimal score;
+	private String scoreString;
 	private int sort;
 
 	public String getOptionID() {
@@ -48,5 +49,19 @@ public class Option {
 
 	public void setSort(int sort) {
 		this.sort = sort;
+	}
+
+	public String getScoreString() {
+		this.scoreString = this.score.toString();
+		return scoreString;
+	}
+
+	public void setScoreString(String scoreString) {
+		this.scoreString = scoreString;
+		try {
+			this.score = new BigDecimal(scoreString);
+		} catch (Exception e) {
+			this.score = new BigDecimal(0);
+		}
 	}
 }
