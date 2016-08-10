@@ -8,7 +8,8 @@
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.ui.theme" value="simple" />
 
-	<package name="Questionnaire" extends="struts-default">
+	<!--不受权限控制的Action请求配置 start -->
+	<package name="non-authority" extends="struts-default">
 		<action name="index2">
 			<result>/index.jsp</result>
 		</action>
@@ -28,6 +29,65 @@
 			<result name="error" type="chain">index</result>
 			<result name="input">/pages/login.jsp</result>
 		</action>
+
+		<!-- 答题 -->
+		<action name="AnswerInit" class="questionnaire.web.action.AnswerAction"
+			method="initAnswer">
+			<result name="success">/pages/answer/userRegister.jsp</result>
+		</action>
+
+		<action name="AnswerRegister" class="questionnaire.web.action.AnswerAction"
+			method="register">
+			<result name="success" type="chain">ExaminationInit</result>
+			<result name="select" type="chain">ExaminationInit</result>
+			<result name="typewrite" type="chain">TypewriteTestInit</result>
+			<result name="finish">/pages/answer/finish.jsp</result>
+		</action>
+		<action name="ExaminationInit" class="questionnaire.web.action.ExaminationAction"
+			method="init">
+			<result name="success">/pages/answer/examination.jsp</result>
+			<result name="typewrite" type="chain">TypewriteTestInit</result>
+			<result name="finish">/pages/answer/finish.jsp</result>
+		</action>
+
+		<action name="ExaminationSave" class="questionnaire.web.action.ExaminationAction"
+			method="save">
+			<result name="success" type="chain">ExaminationInit</result>
+		</action>
+
+		<!-- 打字题 -->
+		<action name="TypewriteTestInit" class="questionnaire.web.action.TypewriteTestAction"
+			method="init">
+			<result name="success">/pages/answer/typewriteTest.jsp</result>
+			<result name="select" type="chain">ExaminationInit</result>
+			<result name="finish">/pages/answer/finish.jsp</result>
+		</action>
+		<action name="TypewriteTestSave" class="questionnaire.web.action.TypewriteTestAction"
+			method="save">
+			<result name="success">/pages/answer/finish.jsp</result>
+		</action>
+	</package>
+	<!--不受权限控制的Action请求配置 end -->
+
+	<package name="authority" extends="struts-default">
+		<interceptors>
+			<!--定义一个名为authority的拦截器 -->
+			<interceptor class="questionnaire.intercepter.AuthorityInterceptor"
+				name="authority" />
+			<!--定义一个包含权限检查的拦截器栈 -->
+			<interceptor-stack name="mydefault">
+				<!--配置内建默认拦截器 -->
+				<interceptor-ref name="defaultStack" />
+				<!--配置自定义的拦截器 -->
+				<interceptor-ref name="authority" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="mydefault" />
+		<!--定义全局Result -->
+		<global-results>
+			<result name="login">/pages/login.jsp</result>
+		</global-results>
 
 		<!-- ############################ 问卷处理 start ############################ -->
 		<!-- 问卷一览 -->
@@ -140,43 +200,33 @@
 		<!-- ############################ 人员处理 end ############################ -->
 
 		<!-- ############################ 答题start ############################ -->
-		<action name="AnswerInit" class="questionnaire.web.action.AnswerAction"
-			method="initAnswer">
-			<result name="success">/pages/answer/userRegister.jsp</result>
-		</action>
+		<!-- <action name="AnswerInit" class="questionnaire.web.action.AnswerAction" 
+			method="initAnswer"> <result name="success">/pages/answer/userRegister.jsp</result> 
+			</action> -->
 
-		<action name="AnswerRegister" class="questionnaire.web.action.AnswerAction"
-			method="register">
-			<result name="success" type="chain">ExaminationInit</result>
-			<result name="select" type="chain">ExaminationInit</result>
-			<result name="typewrite" type="chain">TypewriteTestInit</result>
-			<result name="finish">/pages/answer/finish.jsp</result>
-		</action>
+		<!-- <action name="AnswerRegister" class="questionnaire.web.action.AnswerAction" 
+			method="register"> <result name="success" type="chain">ExaminationInit</result> 
+			<result name="select" type="chain">ExaminationInit</result> <result name="typewrite" 
+			type="chain">TypewriteTestInit</result> <result name="finish">/pages/answer/finish.jsp</result> 
+			</action> -->
 
 		<!-- 选择题 -->
-		<action name="ExaminationInit" class="questionnaire.web.action.ExaminationAction"
-			method="init">
-			<result name="success">/pages/answer/examination.jsp</result>
-			<result name="typewrite" type="chain">TypewriteTestInit</result>
-			<result name="finish">/pages/answer/finish.jsp</result>
-		</action>
+		<!-- <action name="ExaminationInit" class="questionnaire.web.action.ExaminationAction" 
+			method="init"> <result name="success">/pages/answer/examination.jsp</result> 
+			<result name="typewrite" type="chain">TypewriteTestInit</result> <result 
+			name="finish">/pages/answer/finish.jsp</result> </action> -->
 
-		<action name="ExaminationSave" class="questionnaire.web.action.ExaminationAction"
-			method="save">
-			<result name="success" type="chain">ExaminationInit</result>
-		</action>
+		<!-- <action name="ExaminationSave" class="questionnaire.web.action.ExaminationAction" 
+			method="save"> <result name="success" type="chain">ExaminationInit</result> 
+			</action> -->
 
 		<!-- 打字题 -->
-		<action name="TypewriteTestInit" class="questionnaire.web.action.TypewriteTestAction"
-			method="init">
-			<result name="success">/pages/answer/typewriteTest.jsp</result>
-			<result name="select" type="chain">ExaminationInit</result>
-			<result name="finish">/pages/answer/finish.jsp</result>
-		</action>
-		<action name="TypewriteTestSave" class="questionnaire.web.action.TypewriteTestAction"
-			method="save">
-			<result name="success">/pages/answer/finish.jsp</result>
-		</action>
+		<!-- <action name="TypewriteTestInit" class="questionnaire.web.action.TypewriteTestAction" 
+			method="init"> <result name="success">/pages/answer/typewriteTest.jsp</result> 
+			<result name="select" type="chain">ExaminationInit</result> <result name="finish">/pages/answer/finish.jsp</result> 
+			</action> -->
+		<!-- <action name="TypewriteTestSave" class="questionnaire.web.action.TypewriteTestAction" 
+			method="save"> <result name="success">/pages/answer/finish.jsp</result> </action> -->
 		<!-- ############################ 答题 end ############################ -->
 
 		<!-- ############################ 打字题start ############################ -->
