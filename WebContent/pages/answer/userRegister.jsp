@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -43,17 +42,19 @@
 					<div class="form-group">
 						<label class="col-sm-1 control-label">性别</label>
 						<div class="col-sm-1">
-							<s:select class="form-control" name="userInfo.sex" label="性别"
-								list="ddlSex" listKey="key" listValue="value"
-								value="userInfo.sex" />
+							<s:select class="form-control" name="userInfo.sex" list="ddlSex" listKey="key" listValue="value" value="userInfo.sex" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-1 control-label">区域中心</label>
 						<div class="col-sm-2">
-							<s:select class="form-control" name="userInfo.area"
-								list="ddlArea" listKey="key" listValue="value"
-								value="userInfo.area" />
+							<s:select class="form-control" name="userInfo.area" list="ddlArea" listKey="key" listValue="value" value="userInfo.area" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 control-label">来源</label>
+						<div class="col-sm-2">
+							<s:select class="form-control" name="userInfo.from" list="ddlFrom" listKey="key" listValue="value" value="userInfo.from" />
 						</div>
 					</div>
 					<div class="form-group">

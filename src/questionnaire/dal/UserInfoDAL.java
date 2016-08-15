@@ -12,7 +12,7 @@ public class UserInfoDAL extends BaseDAL {
 	private static final String SELECT01 = "select * from userinfo";
 	private static final String SELECT02 = "select * from userinfo where name=? and IDCardNumber=?";
 	private static final String SELECT03 = "select questionnaireparts.sort,Answer.QuestionnaireID,sum(score) from Answer left join questionnaireparts on Answer.QuestionnaireID=questionnaireparts.QuestionnaireID where userID=? group by Answer.QuestionnaireID order by sort";
-	private static final String INSERT01 = "insert into  userinfo(userID,name,phoneNumber,IDCardNumber,sex,area) values(?,?,?,?,?,?)";
+	private static final String INSERT01 = "insert into  userinfo(userID,name,phoneNumber,IDCardNumber,sex,area,FromSource,InsertDate) values(?,?,?,?,?,?,?,now())";
 	private static final String DELETE01 = "delete from userinfo where userid=?";
 
 	public ArrayList<UserInfo> selectList() {
@@ -38,6 +38,7 @@ public class UserInfoDAL extends BaseDAL {
 				userInfo.setIDCardNumber(rs.getString("IDCardNumber"));
 				userInfo.setSex(rs.getString("Sex"));
 				userInfo.setArea(rs.getString("Area"));
+				userInfo.setFrom(rs.getString("FromSource"));
 				// 分数
 				pstmt2 = conn.prepareStatement(SELECT03);
 				pstmt2.setString(1, userInfo.getUserID());
@@ -115,7 +116,8 @@ public class UserInfoDAL extends BaseDAL {
 		return userInfos;
 	}
 
-	public int insert(String userID, String name, String phoneNumber, String IDCardNumber, String sex, String area) {
+	public int insert(String userID, String name, String phoneNumber, String IDCardNumber, String sex, String area,
+			String from) {
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(userID);
 		parameters.add(name);
@@ -123,6 +125,7 @@ public class UserInfoDAL extends BaseDAL {
 		parameters.add(IDCardNumber);
 		parameters.add(sex);
 		parameters.add(area);
+		parameters.add(from);
 		return this.modify(INSERT01, parameters.toArray());
 	}
 
@@ -148,6 +151,7 @@ public class UserInfoDAL extends BaseDAL {
 				userInfo.setIDCardNumber(rs.getString("IDCardNumber"));
 				userInfo.setSex(rs.getString("Sex"));
 				userInfo.setArea(rs.getString("Area"));
+				userInfo.setFrom(rs.getString("FromSource"));
 			}
 
 			rs.close();

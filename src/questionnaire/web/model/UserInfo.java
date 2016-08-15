@@ -10,6 +10,7 @@ public class UserInfo {
 	private String sex;
 	private String sexString;
 	private String area;
+	private String from;
 	private BigDecimal score1;
 	private BigDecimal score2;
 	private BigDecimal score3;
@@ -143,6 +144,14 @@ public class UserInfo {
 	}
 
 	public BigDecimal getSumALLScore() {
-		return this.score1.add(this.score2).add(this.score3).add(this.score4).add(this.score5);
+		return this.score1.add(this.score2).add(this.score3).add(this.score4);
+	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
 	}
 }

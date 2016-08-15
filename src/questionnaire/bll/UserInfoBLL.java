@@ -15,7 +15,7 @@ public class UserInfoBLL {
 	public UserInfo insert(UserInfo userInfo) {
 		userInfo.setUserID(UUID.randomUUID().toString());
 		new UserInfoDAL().insert(userInfo.getUserID(), userInfo.getName(), userInfo.getPhoneNumber(),
-				userInfo.getIDCardNumber(), userInfo.getSex(), userInfo.getArea());
+				userInfo.getIDCardNumber(), userInfo.getSex(), userInfo.getArea(), userInfo.getFrom());
 		return userInfo;
 	}
 

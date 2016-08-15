@@ -33,34 +33,36 @@
 			<tr>
 				<th style="text-align: center;">序号</th>
 				<th style="text-align: center;">区域中心</th>
+				<th style="text-align: center;">来源</th>
 				<th style="text-align: center;">姓名</th>
 				<th style="text-align: center;">性别</th>
 				<th style="text-align: center;">联系方式</th>
 				<th style="text-align: center;">身份证号</th>
-				<th style="text-align: center;">心理测试得分</th>
+				<th style="text-align: center;">性格测试</th>
+				<th style="text-align: center;">坐席测试</th>
 				<th style="text-align: center;">打字速度得分</th>
 				<th style="text-align: center;">面试得分</th>
-				<th style="text-align: center;">岗前通关得分</th>
 				<th style="text-align: center;">总分</th>
+				<th style="text-align: center;">岗前通关得分</th>
 				<th style="text-align: center;">操作</th>
 			</tr>
 			<s:iterator value="userInfos" status="status">
 				<tr>
 					<td style="text-align: center;"><s:property value="#status.index+1" /></td>
 					<td style="text-align: center;"><s:property value="area" /></td>
+					<td style="text-align: center;"><s:property value="from" /></td>
 					<td style="text-align: center;"><s:property value="name" /></td>
 					<td style="text-align: center;"><s:property value="sexString" /></td>
 					<td style="text-align: center;"><s:property value="PhoneNumber" /></td>
 					<td style="text-align: center;"><s:property value="IDCardNumber" /></td>
-					<td style="text-align: center;"><s:property value="scoreSum" /></td>
+					<td style="text-align: center;"><s:property value="score1" /></td>
+					<td style="text-align: center;"><s:property value="score2" /></td>
 					<td style="text-align: center;"><s:property value="score3" /></td>
 					<td style="text-align: center;"><s:property value="score4" /></td>
-					<td style="text-align: center;"><s:property value="score5" /></td>
 					<td style="text-align: center;"><s:property value="sumALLScore" /></td>
-					<td style="text-align: center;">
-					<a href="<s:url action="InterviewScore"><s:param name="userID" value="userID"></s:param></s:url>">打分</a>
-					<a onclick="javascript:return p_del();"  href="<s:url action="InterviewDelete"><s:param name="userID" value="userID"></s:param></s:url>">删除</a>
-					</td>
+					<td style="text-align: center;"><s:property value="score5" /></td>
+					<td style="text-align: center;"><a href="#">选择题</a> <a href="#">打字题</a> <a href="<s:url action="InterviewScore"><s:param name="userID" value="userID"></s:param></s:url>">打分</a> <a
+						onclick="javascript:return p_del();" href="<s:url action="InterviewDelete"><s:param name="userID" value="userID"></s:param></s:url>">删除</a></td>
 				</tr>
 			</s:iterator>
 		</table>
