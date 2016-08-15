@@ -1,5 +1,6 @@
 package questionnaire.web.action;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ public class ExaminationAction extends ActionSupport {
 	private String userID = null;
 	private String questionnaireID = null;
 	private Questionnaire questionnaire = null;
+	private int timeLimit = 0;
 
 	public String init() {
 		// 开始时间
@@ -33,10 +35,12 @@ public class ExaminationAction extends ActionSupport {
 			// 从第一部分开始
 			this.questionnaire = new QuestionnairePartsBLL().selectPart1();
 			this.questionnaireID = this.questionnaire.getQuestionnaireID();
+			this.timeLimit = this.questionnaire.getTimeLimit();
 		} else if (!answerProgress[1]) {
 			// 从第二部分开始
 			this.questionnaire = new QuestionnairePartsBLL().selectPart2();
 			this.questionnaireID = this.questionnaire.getQuestionnaireID();
+			this.timeLimit = this.questionnaire.getTimeLimit();
 		} else if (!answerProgress[2]) {
 			// 打字部分
 			return "typewrite";
@@ -57,14 +61,20 @@ public class ExaminationAction extends ActionSupport {
 				answer.setUserID(this.userID);
 				answer.setQuestionnaireID(questionnaireID);
 				answer.setQuestionID(question.getQuestionID());
-				answer.setOptionID(selectedOptionID);
-				answer.setAnswer(selectedOptionID);
 				answer.setBeginDate((Date) ActionContext.getContext().getSession().get("BEGIN_DATE"));
 				answer.setEndDate(new Date(new java.util.Date().getTime()));
-				for (Option option : question.getOptions()) {
-					if (selectedOptionID.equals(option.getOptionID())) {
-						answer.setScore(option.getScore());
+				if (selectedOptionID != null) {
+					answer.setOptionID(selectedOptionID);
+					answer.setAnswer(selectedOptionID);
+					for (Option option : question.getOptions()) {
+						if (selectedOptionID.equals(option.getOptionID())) {
+							answer.setScore(option.getScore());
+						}
 					}
+				} else {
+					answer.setOptionID("00000000-0000-0000-0000-000000000000");
+					answer.setAnswer("00000000-0000-0000-0000-000000000000");
+					answer.setScore(BigDecimal.ZERO);
 				}
 				count += bll.replace(answer);
 			}
@@ -95,5 +105,13 @@ public class ExaminationAction extends ActionSupport {
 
 	public void setUserID(String userID) {
 		this.userID = userID;
+	}
+
+	public int getTimeLimit() {
+		return timeLimit;
+	}
+
+	public void setTimeLimit(int timeLimit) {
+		this.timeLimit = timeLimit;
 	}
 }
