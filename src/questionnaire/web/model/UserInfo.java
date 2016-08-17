@@ -1,6 +1,7 @@
 package questionnaire.web.model;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 
 public class UserInfo {
 	private String userID;
@@ -11,6 +12,8 @@ public class UserInfo {
 	private String sexString;
 	private String area;
 	private String from;
+	private Date insertDate;
+	private String insertDateString;
 	private String questionnaireID1;
 	private String questionnaireID2;
 	private String questionnaireID3;
@@ -180,5 +183,21 @@ public class UserInfo {
 
 	public void setQuestionnaireID3(String questionnaireID3) {
 		this.questionnaireID3 = questionnaireID3;
+	}
+
+	public Date getInsertDate() {
+		return insertDate;
+	}
+
+	public void setInsertDate(Date insertDate) {
+		this.insertDate = insertDate;
+	}
+
+	public String getInsertDateString() {
+		return insertDateString;
+	}
+
+	public void setInsertDateString(String insertDateString) {
+		this.insertDateString = insertDateString;
 	}
 }

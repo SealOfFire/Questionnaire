@@ -40,6 +40,7 @@ public class UserInfoDAL extends BaseDAL {
 				userInfo.setSex(rs.getString("Sex"));
 				userInfo.setArea(rs.getString("Area"));
 				userInfo.setFrom(rs.getString("FromSource"));
+				userInfo.setInsertDate(rs.getDate("InsertDate"));
 				// 分数
 				pstmt2 = conn.prepareStatement(SELECT03);
 				pstmt2.setString(1, userInfo.getUserID());
