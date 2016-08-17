@@ -11,7 +11,7 @@
 <script type="text/javascript" src="scripts/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<title>选择题详细</title>
+<title>打字详细</title>
 </head>
 <body>
 	<div class="container">
@@ -59,20 +59,12 @@
 			</div>
 		</div>
 
-		<s:iterator value="questionnaire.questions" status="status">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					(
-					<s:property value="#status.index+1" />
-					)
-					<s:property value="caption" />
-				</div>
-				<div class="panel-body">
-					<s:radio list="options" name="questionID%{questionID}" listKey="optionID" listValue="caption" value="selectedValue" disabled="true" />
-				</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">打字题</div>
+			<div class="panel-body">
+				<s:textarea class="form-control" id="typewriteAnswer" name="typewriteAnswer" rows="5" disabled="true" />
 			</div>
-		</s:iterator>
-
+		</div>
 	</div>
 </body>
 </html>

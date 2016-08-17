@@ -61,7 +61,9 @@
 					<td style="text-align: center;">
 						<a target="_blank" href="<s:url action="Detail"><s:param name="userID" value="userID"></s:param><s:param name="questionnaireID" value="questionnaireID2"></s:param></s:url>"><s:property value="score2" /></a>
 					</td>
-					<td style="text-align: center;"><s:property value="score3" /></td>
+					<td style="text-align: center;">
+						<a target="_blank" href="<s:url action="DetailTypewrite"><s:param name="userID" value="userID"></s:param><s:param name="questionnaireID" value="questionnaireID3"></s:param></s:url>"><s:property value="score3" /></a>
+					</td>
 					<td style="text-align: center;"><s:property value="score4" /></td>
 					<td style="text-align: center;"><s:property value="sumALLScore" /></td>
 					<td style="text-align: center;"><s:property value="score5" /></td>

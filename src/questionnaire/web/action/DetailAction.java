@@ -20,6 +20,7 @@ public class DetailAction extends ActionSupport {
 	private String questionnaireID;
 	private Questionnaire questionnaire;
 	private UserInfo userInfo;
+	private String typewriteAnswer;
 
 	@Override
 	public String execute() {
@@ -34,6 +35,16 @@ public class DetailAction extends ActionSupport {
 					question.setSelectedValue(answer.getAnswer());
 				}
 			}
+		}
+
+		return SUCCESS;
+	}
+
+	public String typewrite() {
+		this.userInfo = new UserInfoBLL().select(userID);
+		ArrayList<Answer> answerList = new AnswerBLL().select(this.userID, this.questionnaireID);
+		for (Answer answer : answerList) {
+			typewriteAnswer = answer.getAnswer();
 		}
 
 		return SUCCESS;
@@ -69,6 +80,14 @@ public class DetailAction extends ActionSupport {
 
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
+	}
+
+	public String getTypewriteAnswer() {
+		return typewriteAnswer;
+	}
+
+	public void setTypewriteAnswer(String typewriteAnswer) {
+		this.typewriteAnswer = typewriteAnswer;
 	}
 
 }

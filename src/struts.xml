@@ -202,6 +202,11 @@
 			method="execute">
 			<result name="success">/pages/interview/detailselect.jsp</result>
 		</action>
+
+		<action name="DetailTypewrite" class="questionnaire.web.action.DetailAction"
+			method="typewrite">
+			<result name="success">/pages/interview/detailtypewrite.jsp</result>
+		</action>
 		<!-- ############################ 人员处理 end ############################ -->
 
 		<!-- ############################ 答题start ############################ -->
