@@ -23,6 +23,10 @@ public class UserInfoBLL {
 		return new UserInfoDAL().select(name, IDCardNumber);
 	}
 
+	public UserInfo select(String userID) {
+		return new UserInfoDAL().select(userID);
+	}
+
 	public int delete(String userID) {
 		return new UserInfoDAL().delete(userID);
 	}

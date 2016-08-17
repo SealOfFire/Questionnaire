@@ -197,6 +197,11 @@
 			<result name="success" type="chain">InterviewScore</result>
 			<result name="input">/pages/interview/score.jsp</result>
 		</action>
+
+		<action name="Detail" class="questionnaire.web.action.DetailAction"
+			method="execute">
+			<result name="success">/pages/interview/detailselect.jsp</result>
+		</action>
 		<!-- ############################ 人员处理 end ############################ -->
 
 		<!-- ############################ 答题start ############################ -->

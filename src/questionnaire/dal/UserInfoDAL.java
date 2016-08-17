@@ -11,6 +11,7 @@ import questionnaire.web.model.UserInfo;
 public class UserInfoDAL extends BaseDAL {
 	private static final String SELECT01 = "select * from userinfo";
 	private static final String SELECT02 = "select * from userinfo where name=? and IDCardNumber=?";
+	private static final String SELECT04 = "select * from userinfo where UserID=?";
 	private static final String SELECT03 = "select questionnaireparts.sort,Answer.QuestionnaireID,sum(score) from Answer left join questionnaireparts on Answer.QuestionnaireID=questionnaireparts.QuestionnaireID where userID=? group by Answer.QuestionnaireID order by sort";
 	private static final String INSERT01 = "insert into  userinfo(userID,name,phoneNumber,IDCardNumber,sex,area,FromSource,InsertDate) values(?,?,?,?,?,?,?,now())";
 	private static final String DELETE01 = "delete from userinfo where userid=?";
@@ -52,10 +53,13 @@ public class UserInfoDAL extends BaseDAL {
 							userInfo.setScore4(score);
 					} else if (rs2.getString(1).equals("0")) {
 						userInfo.setScore1(score);
+						userInfo.setQuestionnaireID1(rs2.getString(2));
 					} else if (rs2.getString(1).equals("1")) {
 						userInfo.setScore2(score);
+						userInfo.setQuestionnaireID2(rs2.getString(2));
 					} else if (rs2.getString(1).equals("2")) {
 						userInfo.setScore3(score);
+						userInfo.setQuestionnaireID3(rs2.getString(2));
 					} else {
 
 					}
@@ -140,6 +144,70 @@ public class UserInfoDAL extends BaseDAL {
 			pstmt = conn.prepareStatement(SELECT02);
 			pstmt.setString(1, name);
 			pstmt.setString(2, IDCardNumber);
+
+			// 执行查询
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				userInfo.setUserID(rs.getString("UserID"));
+				userInfo.setName(rs.getString("Name"));
+				userInfo.setPhoneNumber(rs.getString("PhoneNumber"));
+				userInfo.setIDCardNumber(rs.getString("IDCardNumber"));
+				userInfo.setSex(rs.getString("Sex"));
+				userInfo.setArea(rs.getString("Area"));
+				userInfo.setFrom(rs.getString("FromSource"));
+			}
+
+			rs.close();
+			rs = null;
+			pstmt.close();
+			pstmt = null;
+			conn.close();
+			conn = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 出错时关闭连接
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				rs = null;
+			}
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				pstmt = null;
+			}
+
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				conn = null;
+			}
+		}
+		return userInfo;
+	}
+
+	public UserInfo select(String userID) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		UserInfo userInfo = new UserInfo();
+		try {
+
+			conn = this.getConnect();
+			pstmt = conn.prepareStatement(SELECT04);
+			pstmt.setString(1, userID);
 
 			// 执行查询
 			rs = pstmt.executeQuery();

@@ -55,13 +55,17 @@
 					<td style="text-align: center;"><s:property value="sexString" /></td>
 					<td style="text-align: center;"><s:property value="PhoneNumber" /></td>
 					<td style="text-align: center;"><s:property value="IDCardNumber" /></td>
-					<td style="text-align: center;"><s:property value="score1" /></td>
-					<td style="text-align: center;"><s:property value="score2" /></td>
+					<td style="text-align: center;">
+						<a target="_blank" href="<s:url action="Detail"><s:param name="userID" value="userID"></s:param><s:param name="questionnaireID" value="questionnaireID1"></s:param></s:url>"><s:property value="score1" /></a>
+					</td>
+					<td style="text-align: center;">
+						<a target="_blank" href="<s:url action="Detail"><s:param name="userID" value="userID"></s:param><s:param name="questionnaireID" value="questionnaireID2"></s:param></s:url>"><s:property value="score2" /></a>
+					</td>
 					<td style="text-align: center;"><s:property value="score3" /></td>
 					<td style="text-align: center;"><s:property value="score4" /></td>
 					<td style="text-align: center;"><s:property value="sumALLScore" /></td>
 					<td style="text-align: center;"><s:property value="score5" /></td>
-					<td style="text-align: center;"><a href="#">选择题</a> <a href="#">打字题</a> <a href="<s:url action="InterviewScore"><s:param name="userID" value="userID"></s:param></s:url>">打分</a> <a
+					<td style="text-align: center;"><a href="<s:url action="InterviewScore"><s:param name="userID" value="userID"></s:param></s:url>">打分</a> <a
 						onclick="javascript:return p_del();" href="<s:url action="InterviewDelete"><s:param name="userID" value="userID"></s:param></s:url>">删除</a></td>
 				</tr>
 			</s:iterator>

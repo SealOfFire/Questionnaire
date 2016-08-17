@@ -22,6 +22,8 @@ public class Question {
 
 	private ArrayList<Option> options;
 
+	private String selectedValue;
+
 	public Question() {
 		this.caption = "";
 		this.questionType = QuestionType.TemperamentTest.toString();
@@ -97,5 +99,13 @@ public class Question {
 
 	public void setOptions(ArrayList<Option> options) {
 		this.options = options;
+	}
+
+	public String getSelectedValue() {
+		return selectedValue;
+	}
+
+	public void setSelectedValue(String selectedValue) {
+		this.selectedValue = selectedValue;
 	}
 }

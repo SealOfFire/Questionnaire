@@ -11,6 +11,9 @@ public class UserInfo {
 	private String sexString;
 	private String area;
 	private String from;
+	private String questionnaireID1;
+	private String questionnaireID2;
+	private String questionnaireID3;
 	private BigDecimal score1;
 	private BigDecimal score2;
 	private BigDecimal score3;
@@ -153,5 +156,29 @@ public class UserInfo {
 
 	public void setFrom(String from) {
 		this.from = from;
+	}
+
+	public String getQuestionnaireID1() {
+		return questionnaireID1;
+	}
+
+	public void setQuestionnaireID1(String questionnaireID1) {
+		this.questionnaireID1 = questionnaireID1;
+	}
+
+	public String getQuestionnaireID2() {
+		return questionnaireID2;
+	}
+
+	public void setQuestionnaireID2(String questionnaireID2) {
+		this.questionnaireID2 = questionnaireID2;
+	}
+
+	public String getQuestionnaireID3() {
+		return questionnaireID3;
+	}
+
+	public void setQuestionnaireID3(String questionnaireID3) {
+		this.questionnaireID3 = questionnaireID3;
 	}
 }
