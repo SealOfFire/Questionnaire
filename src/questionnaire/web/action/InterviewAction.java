@@ -3,6 +3,7 @@ package questionnaire.web.action;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,7 +16,9 @@ import questionnaire.bll.InterviewBLL;
 import questionnaire.bll.UserInfoBLL;
 import questionnaire.web.model.Answer;
 import questionnaire.web.model.Interview;
+import questionnaire.web.model.ListItem;
 import questionnaire.web.model.UserInfo;
+import questionnaire.web.model.UserInfoQuery;
 
 public class InterviewAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
@@ -26,8 +29,53 @@ public class InterviewAction extends ActionSupport {
 	private String overall = null;
 	private String score5 = null;
 
+	private ArrayList<ListItem> ddlArea = null;
+	private ArrayList<ListItem> ddlFrom = null;
+
+	private UserInfoQuery userInfoQuery;
+
 	public String list() throws Exception {
-		this.userInfos = new UserInfoBLL().selectList();
+		this.initDropDownList();
+
+		// 初始时间
+		Calendar calendarStart = Calendar.getInstance();
+		Calendar calendarEnd = Calendar.getInstance();
+		calendarStart.setTime(new java.util.Date());
+		calendarStart.set(Calendar.DAY_OF_MONTH, calendarStart.get(Calendar.DAY_OF_MONTH) - 7);
+		calendarStart.set(Calendar.HOUR_OF_DAY, 0);
+		calendarStart.set(Calendar.MINUTE, 0);
+		calendarStart.set(Calendar.SECOND, 0);
+		calendarEnd.setTime(new java.util.Date());
+		calendarEnd.set(Calendar.HOUR_OF_DAY, 23);
+		calendarEnd.set(Calendar.MINUTE, 59);
+		calendarEnd.set(Calendar.SECOND, 59);
+
+		if (this.userInfoQuery == null) {
+			this.userInfoQuery = new UserInfoQuery();
+
+			this.userInfoQuery.startDate = new Date(calendarStart.getTime().getTime());
+			this.userInfoQuery.endDate = new Date(calendarEnd.getTime().getTime());
+		} else {
+			if (this.userInfoQuery.startDate == null) {
+				this.userInfoQuery.startDate = new Date(calendarStart.getTime().getTime());
+			}
+			if (this.userInfoQuery.endDate == null) {
+				this.userInfoQuery.endDate = new Date(calendarEnd.getTime().getTime());
+			}
+		}
+
+		calendarStart.setTime((java.util.Date) this.userInfoQuery.startDate);
+		calendarStart.set(Calendar.HOUR_OF_DAY, 0);
+		calendarStart.set(Calendar.MINUTE, 0);
+		calendarStart.set(Calendar.SECOND, 0);
+		this.userInfoQuery.startDate = new Date(calendarStart.getTime().getTime());
+		calendarEnd.setTime((java.util.Date) this.userInfoQuery.endDate);
+		calendarEnd.set(Calendar.HOUR_OF_DAY, 23);
+		calendarEnd.set(Calendar.MINUTE, 59);
+		calendarEnd.set(Calendar.SECOND, 59);
+		this.userInfoQuery.endDate = new Date(calendarEnd.getTime().getTime());
+
+		this.userInfos = new UserInfoBLL().selectList(this.userInfoQuery);
 		return SUCCESS;
 	}
 
@@ -129,6 +177,25 @@ public class InterviewAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	private void initDropDownList() {
+		this.ddlArea = new ArrayList<ListItem>();
+		this.ddlArea.add(new ListItem("", ""));
+		this.ddlArea.add(new ListItem("北区中心", "北区中心"));
+		this.ddlArea.add(new ListItem("西区中心", "西区中心"));
+		this.ddlArea.add(new ListItem("中原中心", "中原中心"));
+		this.ddlArea.add(new ListItem("南区中心", "南区中心"));
+		this.ddlArea.add(new ListItem("互联网客服中心", "互联网客服中心"));
+		this.ddlArea.add(new ListItem("客户回访中心", "客户回访中心"));
+
+		this.ddlFrom = new ArrayList<ListItem>();
+		this.ddlFrom.add(new ListItem("", ""));
+		this.ddlFrom.add(new ListItem("社会招聘", "社会招聘"));
+		this.ddlFrom.add(new ListItem("校园招聘", "校园招聘"));
+		this.ddlFrom.add(new ListItem("中介渠道", "中介渠道"));
+		this.ddlFrom.add(new ListItem("内部推荐", "内部推荐"));
+		this.ddlFrom.add(new ListItem("机构推荐", "机构推荐"));
+	}
+
 	public ArrayList<UserInfo> getUserInfos() {
 		return userInfos;
 	}
@@ -167,5 +234,29 @@ public class InterviewAction extends ActionSupport {
 
 	public void setScore5(String score5) {
 		this.score5 = score5;
+	}
+
+	public ArrayList<ListItem> getDdlArea() {
+		return ddlArea;
+	}
+
+	public void setDdlArea(ArrayList<ListItem> ddlArea) {
+		this.ddlArea = ddlArea;
+	}
+
+	public ArrayList<ListItem> getDdlFrom() {
+		return ddlFrom;
+	}
+
+	public void setDdlFrom(ArrayList<ListItem> ddlFrom) {
+		this.ddlFrom = ddlFrom;
+	}
+
+	public UserInfoQuery getUserInfoQuery() {
+		return userInfoQuery;
+	}
+
+	public void setUserInfoQuery(UserInfoQuery userInfoQuery) {
+		this.userInfoQuery = userInfoQuery;
 	}
 }

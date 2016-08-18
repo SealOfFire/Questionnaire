@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import questionnaire.web.model.UserInfo;
+import questionnaire.web.model.UserInfoQuery;
 
 public class UserInfoDAL extends BaseDAL {
 	private static final String SELECT01 = "select * from userinfo";
@@ -16,7 +17,7 @@ public class UserInfoDAL extends BaseDAL {
 	private static final String INSERT01 = "insert into  userinfo(userID,name,phoneNumber,IDCardNumber,sex,area,FromSource,InsertDate) values(?,?,?,?,?,?,?,now())";
 	private static final String DELETE01 = "delete from userinfo where userid=?";
 
-	public ArrayList<UserInfo> selectList() {
+	public ArrayList<UserInfo> selectList(UserInfoQuery query) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
@@ -25,8 +26,47 @@ public class UserInfoDAL extends BaseDAL {
 		ArrayList<UserInfo> userInfos = new ArrayList<UserInfo>();
 		try {
 
+			String sql = SELECT01 + " where 1=1 ";
+
+			ArrayList<Object> params = new ArrayList<Object>();
+			if (query.startDate != null) {
+				sql += " and InsertDate>=?";
+				params.add(query.startDate);
+			}
+
+			if (query.endDate != null) {
+				sql += " and InsertDate<=?";
+				params.add(query.endDate);
+			}
+
+			if (query.name != null && query.name.length() > 0) {
+				sql += " and Name like ? ";
+				params.add("%" + query.name + "%");
+			}
+
+			if (query.IDCardNumber != null && query.IDCardNumber.length() > 0) {
+				sql += " and Name = ? ";
+				params.add(query.IDCardNumber);
+			}
+
+			if (query.area != null && query.area.length() > 0) {
+				sql += " and Area = ? ";
+				params.add(query.area);
+			}
+
+			if (query.fromSource != null && query.fromSource.length() > 0) {
+				sql += " and FromSource = ? ";
+				params.add(query.fromSource);
+			}
+
 			conn = this.getConnect();
-			pstmt = conn.prepareStatement(SELECT01);
+			pstmt = conn.prepareStatement(sql);
+
+			int i = 0;
+			for (Object p : params) {
+				i++;
+				pstmt.setObject(i, p);
+			}
 
 			// 执行查询
 			rs = pstmt.executeQuery();

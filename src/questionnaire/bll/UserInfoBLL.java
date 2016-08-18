@@ -5,11 +5,12 @@ import java.util.UUID;
 
 import questionnaire.dal.UserInfoDAL;
 import questionnaire.web.model.UserInfo;
+import questionnaire.web.model.UserInfoQuery;
 
 public class UserInfoBLL {
-	public ArrayList<UserInfo> selectList() {
+	public ArrayList<UserInfo> selectList(UserInfoQuery query) {
 		// ArrayList<UserInfo> userInfo = new UserInfoDAL().selectList();
-		return new UserInfoDAL().selectList();
+		return new UserInfoDAL().selectList(query);
 	}
 
 	public UserInfo insert(UserInfo userInfo) {
