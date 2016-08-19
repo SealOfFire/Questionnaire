@@ -16,6 +16,7 @@ public class UserInfoDAL extends BaseDAL {
 	private static final String SELECT03 = "select questionnaireparts.sort,Answer.QuestionnaireID,sum(score) from Answer left join questionnaireparts on Answer.QuestionnaireID=questionnaireparts.QuestionnaireID where userID=? group by Answer.QuestionnaireID order by sort";
 	private static final String INSERT01 = "insert into  userinfo(userID,name,phoneNumber,IDCardNumber,sex,area,FromSource,InsertDate) values(?,?,?,?,?,?,?,now())";
 	private static final String DELETE01 = "delete from userinfo where userid=?";
+	private static final String SELECT05 = "select * from(select UserInfo.*,if(s1.score is null,0,s1.score) score1,if(s2.score is null,0,s2.score) score2,if(s3.score is null,0,s3.score) score3,if(s4.score is null,0,s4.score) score4,if(s1.score is null,0,s1.score)+if(s2.score is null,0,s2.score)+if(s3.score is null,0,s3.score)+if(s4.score is null,0,s4.score) score5 from UserInfo left join (select Answer.UserID,sum(score) score from Answer left join questionnaireparts on Answer.QuestionnaireID=questionnaireparts.QuestionnaireID where questionnaireparts.sort=0 group by Answer.UserID,Answer.QuestionnaireID) s1 on UserInfo.UserID=s1.UserID left join (select Answer.UserID,sum(score) score from Answer left join questionnaireparts on Answer.QuestionnaireID=questionnaireparts.QuestionnaireID where questionnaireparts.sort=1 group by Answer.UserID,Answer.QuestionnaireID) s2 on UserInfo.UserID=s1.UserID and s1.UserID=s2.UserID left join (select Answer.UserID,sum(score) score from Answer left join questionnaireparts on Answer.QuestionnaireID=questionnaireparts.QuestionnaireID where questionnaireparts.sort=2 group by Answer.UserID,Answer.QuestionnaireID) s3 on UserInfo.UserID=s1.UserID and s1.UserID=s3.UserID left join (select Answer.UserID,sum(score) score from Answer left join questionnaireparts on Answer.QuestionnaireID=questionnaireparts.QuestionnaireID where Answer.QuestionnaireID='00000000-0000-0000-0000-000000000000' group by Answer.UserID,Answer.QuestionnaireID) s4 on UserInfo.UserID=s1.UserID and s1.UserID=s4.UserID) t";
 
 	public ArrayList<UserInfo> selectList(UserInfoQuery query) {
 		Connection conn = null;
@@ -26,7 +27,7 @@ public class UserInfoDAL extends BaseDAL {
 		ArrayList<UserInfo> userInfos = new ArrayList<UserInfo>();
 		try {
 
-			String sql = SELECT01 + " where 1=1 ";
+			String sql = SELECT05 + " where 1=1 ";
 
 			ArrayList<Object> params = new ArrayList<Object>();
 			if (query.startDate != null) {
@@ -58,6 +59,12 @@ public class UserInfoDAL extends BaseDAL {
 				sql += " and FromSource = ? ";
 				params.add(query.fromSource);
 			}
+
+			sql += this.getScore(query.score1, "score1", params);
+			sql += this.getScore(query.score2, "score2", params);
+			sql += this.getScore(query.score3, "score3", params);
+			sql += this.getScore(query.score4, "score4", params);
+			sql += this.getScore(query.score5, "score5", params);
 
 			conn = this.getConnect();
 			pstmt = conn.prepareStatement(sql);
@@ -110,12 +117,16 @@ public class UserInfoDAL extends BaseDAL {
 
 			rs.close();
 			rs = null;
-			rs2.close();
-			rs2 = null;
+			if (rs2 != null) {
+				rs2.close();
+				rs2 = null;
+			}
 			pstmt.close();
 			pstmt = null;
-			pstmt2.close();
-			pstmt2 = null;
+			if (pstmt2 != null) {
+				pstmt2.close();
+				pstmt2 = null;
+			}
 			conn.close();
 			conn = null;
 		} catch (Exception e) {
@@ -307,5 +318,37 @@ public class UserInfoDAL extends BaseDAL {
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		parameters.add(userID);
 		return this.modify(DELETE01, parameters.toArray());
+	}
+
+	private BigDecimal getValue(String value) {
+		try {
+			return new BigDecimal(value);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return BigDecimal.ZERO;
+		}
+	}
+
+	private String getScore(String score, String column, ArrayList<Object> params) {
+		String sql = "";
+		if (score != null && score.length() > 0) {
+			if (score.indexOf(">=") >= 0) {
+				sql = " and " + column + " >= ? ";
+				params.add(this.getValue(score.replace(">=", "")));
+			} else if (score.indexOf("<=") >= 0) {
+				sql = " and " + column + " <= ? ";
+				params.add(this.getValue(score.replace("<=", "")));
+			} else if (score.indexOf("<") >= 0) {
+				sql = " and " + column + " < ? ";
+				params.add(this.getValue(score.replace("<", "")));
+			} else if (score.indexOf(">") >= 0) {
+				sql = " and " + column + " > ? ";
+				params.add(this.getValue(score.replace(">", "")));
+			} else if (score.indexOf("=") >= 0) {
+				sql = " and " + column + " = ? ";
+				params.add(this.getValue(score.replace("=", "")));
+			}
+		}
+		return sql;
 	}
 }

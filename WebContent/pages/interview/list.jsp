@@ -81,6 +81,36 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="col-sm-1 control-label">性格测试</label>
+						<div class="col-sm-3">
+							<s:textfield class="form-control" name="userInfoQuery.score1" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 control-label">坐席素质</label>
+						<div class="col-sm-3">
+							<s:textfield class="form-control" name="userInfoQuery.score2" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 control-label">打字速度</label>
+						<div class="col-sm-3">
+							<s:textfield class="form-control" name="userInfoQuery.score3" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 control-label">面试得分</label>
+						<div class="col-sm-3">
+							<s:textfield class="form-control" name="userInfoQuery.score4" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 control-label">面试总分</label>
+						<div class="col-sm-3">
+							<s:textfield class="form-control" name="userInfoQuery.score5" />
+						</div>
+					</div>
+					<div class="form-group">
 						<div class="col-sm-offset-1 col-sm-10">
 							<s:submit class="btn btn-primary" value="查找" />
 						</div>
