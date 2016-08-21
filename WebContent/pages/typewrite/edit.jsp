@@ -70,7 +70,7 @@
 					<div class="form-group">
 						<label class="col-sm-1 control-label">内容</label>
 						<div class="col-sm-11">
-							<s:textarea class="form-control" id="typewrite.captionText" name="typewrite.captionText" rows="3" />
+							<s:textarea class="form-control" id="typewrite.captionText" name="typewrite.captionText" rows="20" />
 						</div>
 					</div>
 					<s:fielderror style="color:red;">

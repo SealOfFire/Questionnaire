@@ -45,7 +45,7 @@
 			</div>
 			<div class="form-group">
 				<label for="exampleInputPassword1">输入上图的内容</label>
-				<s:textarea class="form-control" id="text" name="text" rows="3" />
+				<s:textarea class="form-control" id="text" name="text" rows="20" />
 			</div>
 			<button type="submit" class="btn btn-primary">保存</button>
 		</s:form>

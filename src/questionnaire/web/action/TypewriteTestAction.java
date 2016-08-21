@@ -52,7 +52,7 @@ public class TypewriteTestAction extends ActionSupport {
 			answer.setAnswer(this.text);
 			answer.setBeginDate((Date) ActionContext.getContext().getSession().get("BEGIN_DATE"));
 			answer.setEndDate(new Date(new java.util.Date().getTime()));
-			answer.setScore(new BigDecimal(0));
+			answer.setScore(new BigDecimal(this.text.replace("\r", "").replace("\n", "").length()));
 			count += new AnswerBLL().replace(answer);
 		}
 		return SUCCESS;

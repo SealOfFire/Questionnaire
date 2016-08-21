@@ -62,7 +62,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">打字题</div>
 			<div class="panel-body">
-				<s:textarea class="form-control" id="typewriteAnswer" name="typewriteAnswer" rows="5" disabled="true" />
+				<s:textarea class="form-control" id="typewriteAnswer" name="typewriteAnswer" rows="20" disabled="true" />
 			</div>
 		</div>
 	</div>
