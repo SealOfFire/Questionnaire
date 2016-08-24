@@ -27,10 +27,13 @@
 		$("#lblCountDown").text(m + ":" + s);
 	}
 	setInterval(countDown, 1000);
+	
+	document.oncontextmenu=new Function("event.returnValue=false");
+	document.onselectstart=new Function("event.returnValue=false"); 
 </script>
 <title>打字测试</title>
 </head>
-<body>
+<body oncontextmenu="return false" onselectstart="return false">
 	<div class="container">
 		<h1>打字测试</h1>
 		<s:form class="form-horizontal" action="TypewriteTestSave" id="form">
