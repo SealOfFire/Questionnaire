@@ -46,6 +46,7 @@ public class InterviewAction extends ActionSupport {
 		calendarStart.set(Calendar.MINUTE, 0);
 		calendarStart.set(Calendar.SECOND, 0);
 		calendarEnd.setTime(new java.util.Date());
+		calendarEnd.set(Calendar.DAY_OF_MONTH, calendarEnd.get(Calendar.DAY_OF_MONTH) + 1);
 		calendarEnd.set(Calendar.HOUR_OF_DAY, 23);
 		calendarEnd.set(Calendar.MINUTE, 59);
 		calendarEnd.set(Calendar.SECOND, 59);

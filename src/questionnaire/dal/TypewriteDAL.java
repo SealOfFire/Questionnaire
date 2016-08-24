@@ -20,6 +20,7 @@ public class TypewriteDAL extends BaseDAL {
 		parameters.add(captionText);
 		parameters.add(captionImage);
 		parameters.add(timeLimit);
+		// System.out.println(captionImage);
 		return this.modify(INSERT01, parameters.toArray());
 	}
 
