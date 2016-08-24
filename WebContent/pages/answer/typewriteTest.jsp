@@ -38,7 +38,9 @@
 			<s:hidden name="questionnaireID" />
 			<s:hidden name="questionID" />
 			<div class="form-group">
-				<label for="exampleInputEmail1">事例</label> <img class="img-responsive" alt="Responsive image" src="<s:property value="typewrite.captionImage" />">
+				<label for="exampleInputEmail1">事例</label> 
+				<!-- <img class="img-responsive" alt="Responsive image" src="<s:property value="typewrite.captionImage" />"> -->
+				<s:textarea class="form-control" id="typewrite.captionText" name="typewrite.captionText" rows="20" disabled="true"/>
 			</div>
 			<div class="form-group">
 				<label>剩余时间</label> <label id="lblCountDown"></label>
