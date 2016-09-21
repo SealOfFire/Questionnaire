@@ -9,7 +9,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class BaseDAL {
-	private static String connectionString = "jdbc:mysql://localhost/questionnairedb?user=root&password=root&characterEncoding=utf8&useSSL=false&serverTimezone=GMT";
+	private static String connectionString = "jdbc:mysql://192.168.50.192/questionnairedb?user=root&password=root&characterEncoding=utf8&useSSL=false&serverTimezone=GMT";
 	private static String className = "com.mysql.cj.jdbc.Driver";
 	private DataSource ds;
 

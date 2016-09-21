@@ -2,6 +2,6 @@
 <Context>
 	<Resource name="jdbc/mysql" auth="Container" type="javax.sql.DataSource"
 		driverClassName="com.mysql.cj.jdbc.Driver"
-		url="jdbc:mysql://localhost/questionnairedb?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=GMT"
+		url="jdbc:mysql://192.168.50.192/questionnairedb?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=GMT"
 		username="root" password="root" />
 </Context> 
